@@ -7,14 +7,22 @@
     <body>
         <header>
             <ul>
-                <li><a href="html.html">Sebastian's Webpage</a></li>
+                <li><a href="index.html">Sebastian's Webpage</a></li>
                 <li class="active"><a href="coolJSStuff.html">Cool JS Stuff</a></li>
-                <li><a href="https://bing.com">Bing</a></li>
+                <li><a href="labs.html">Labs</a></li>
                 <li><a href="https://duckduckgo.com">DuckDuckGo</a></li>
             </ul>
         </header>
-        <button class="coolButton" id="chaneTextButton" onclick="changeTextOfButton()">Click me to change the text!</button>
-        <button class="coolButton" onclick="sayText('Hello World!')">Say Hello World!</button>
+        <div class="flexDiv spacing">
+            <button class="coolButton" id="changeTextButton" onclick="changeTextOfButton()">Click me to change the text!</button>
+            <button class="coolButton" onclick="sayText('Hello World!')">Say Hello World!</button>
+        </div>
+        <div class="flexDiv spacing">
+            <br>
+            <button class="coolButton" onclick="doAddition()">Click me to add two numbers together</button>
+            <h1 id="additionResult"></h1>
+            <br>
+        </div>
         <script src="jsFile.js"></script>
     </body>
 </html>

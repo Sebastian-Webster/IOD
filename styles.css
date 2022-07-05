@@ -20,14 +20,14 @@ header > * {
     color: white;
 }
 */
-ul {
+header ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     background-color: #333;
 }
-li a {
+header li a {
     display: block;
     width: auto;
     text-decoration: none;
@@ -71,4 +71,11 @@ header {
 .coolButton:hover {
     background-color: red;
     color: white;
+}
+.flexDiv {
+    display: flex;
+    justify-content: center;
+}
+.spacing {
+    margin-top: 30px;
 }
