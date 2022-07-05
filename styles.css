@@ -1,0 +1,74 @@
+a:hover {
+    color: red;
+}
+th {
+    background-color: red;
+}
+body {
+    background-color: yellow;
+}
+#blueParagraph {
+    color: black;
+    font-weight: bold;
+}
+table {
+    border: 1px solid black;
+}
+/*
+header > * {
+    text-align: center;
+    color: white;
+}
+*/
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+li a {
+    display: block;
+    width: auto;
+    text-decoration: none;
+    color: white;
+    padding: 8px 16px;
+}
+header li {
+    text-align: center;
+    border-bottom: 1px solid white;
+    display: inline;
+    float: left;
+}
+header li:last-child {
+    border-bottom: none;
+}
+li a:hover {
+    background-color: #555;
+    color: red;
+}
+.active {
+    background-color: #04AA6D;
+    color: white;
+}
+html, body {
+    margin: 0px;
+}
+header {
+    background-color: black;
+    margin-bottom: 10px;
+}
+.coolButton {
+    background-color: #07d68a;
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Arial;
+}
+.coolButton:hover {
+    background-color: red;
+    color: white;
+}

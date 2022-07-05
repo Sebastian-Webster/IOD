@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sebastian's Webpage</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <header>
+            <ul>
+                <li class="active"><a href="html.html">Sebastian's Webpage</a></li>
+                <li><a href="coolJSStuff.html">Cool JS Stuff</a></li>
+                <li><a href="https://bing.com">Bing</a></li>
+                <li><a href="https://duckduckgo.com">DuckDuckGo</a></li>
+            </ul>
+        </header>
+        <p id="demo">This color should be red</p>
+        <button onclick="sayHello()">Say Hello</button>
+        <div style="border-color: red; border-width: 2px; border-style: solid;">
+            <h3>This div has a red border.</h3>
+            <p>Hello this is a paragraph.</p>
+            <p style="color: blue">This is a blue paragraph.</p>
+            <h1 style="text-align: center;">This heading is centred on the page</h1>
+            <a href="https://google.com"><img src="google_logo.png" alt="Picture of Google" width="100px" height="100px"></a>
+            <a href="https://google.com" style="font-size: 30pt;" alt="Link to Google">Go To Google</a>
+        </div>
+        <ul>
+            <li>Item One</li>
+            <li>Item Two</li>
+            <li>Item Three</li>
+        </ul>
+        <ol>
+            <li>Item One</li>
+            <li>Item Two</li>
+            <li>Item Three</li>
+        </ol>
+        <table>
+            <tr>
+                <th>Header One</th>
+                <th>Header Two</th>
+            </tr>
+            <tr>
+                <td>Cell One</td>
+                <td>Cell Two</td>
+            </tr>
+            <tr>
+                <td>Cell One</td>
+                <td>Cell Two</td>
+            </tr>
+        </table>
+        <p>I am normal</p>
+        <p style="color: red;">I am red</p>
+        <p style="color: green;">I am green</p>
+        <p id="blueParagraph" style="color: blue;">This is blue because in-line styles take precedence.</p>
+        <script src="jsFile.js"></script>
+        <script>
+            document.getElementById('demo').style.color = 'red';
+            document.getElementById('demo').style.backgroundColor = 'black';
+            document.getElementById('demo').style.fontWeight = 'bold';
+        </script>
+    </body>
+</html>
