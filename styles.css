@@ -1,7 +1,7 @@
 a:hover {
     color: red;
 }
-th {
+table:not(.centerTableRows) th {
     background-color: red;
 }
 body {
@@ -12,7 +12,7 @@ body {
     font-weight: bold;
 }
 table {
-    border: 1px solid black;
+    border: 2px solid black;
 }
 /*
 header > * {
@@ -78,4 +78,79 @@ header {
 }
 .spacing {
     margin-top: 30px;
+}
+.centerTableRows th, .centerTableRows td {
+    text-align: center;
+}
+
+.centerTableRows td, .centerTableRows th {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.centerTableRows td:first-child, .centerTableRows th:first-child {
+    border-right: 1px solid black;
+    border-left: none;
+    border-bottom: none;
+    border-top: none;
+}
+
+.centerTableRows td:last-child, .centerTableRows th:last-child {
+    border-left: 1px solid black;
+    border-right: none;
+    border-bottom: none;
+    border-top: none;
+}
+.tenPixelsLeftPadding {
+    padding-left: 10px;
+}
+td:hover, th:hover {
+    background-color: green;
+    color: white;
+    font-style: italic;
+}
+.centerTableRows {
+    animation: rainbowBackgroundColor 10s infinite;
+}
+
+@keyframes rainbowBackgroundColor {
+    0% {
+        background-color: red;
+    }
+    16.67% {
+        background-color: orange;
+    }
+    33.33% {
+        background-color: yellow;
+    }
+    50% {
+        background-color: green;
+        color: black;
+    }
+    66.66% {
+        background-color: blue;
+        color: white;
+    }
+    83.33% {
+        background-color: indigo;
+        color: white;
+    }
+    100% {
+        background-color: red;
+        color: black;
+    }
+}
+.goBackButton {
+    background-color: #07d68a;
+    color: black;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Arial;
+}
+.goBackButton:hover {
+    background-color: red;
+    color: white;
 }
