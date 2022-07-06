@@ -1,0 +1,108 @@
+{
+    "dealerships": {
+      "Carl's Car Country": {
+        "cars": [
+          {
+            "maker": "Tesla",
+            "model": "X",
+            "modelYear": 2019,
+            "mileageKM": 2429,
+            "askingPrice": 180000
+          },
+          {
+            "maker": "Tesla",
+            "model": "S",
+            "modelYear": 2020,
+            "mileageKM": 3490,
+            "askingPrice": 150000
+          },
+          {
+            "maker": "Tesla",
+            "model": "3",
+            "modelYear": 2019,
+            "mileageKM": 100,
+            "askingPrice": 80000
+          },
+          {
+            "maker": "Toyota",
+            "model": "Carolla",
+            "modelYear": 2010,
+            "mileageKM": 54302,
+            "askingPrice": 15000
+          }
+        ],
+        "staff": [
+          {
+            "name": "Carl Caligahan",
+            "age": 34,
+            "yearlyWage": 30000
+          },
+          {
+            "name": "Michael Carter",
+            "age": 28,
+            "yearlyWage": 10000
+          }
+        ]
+      },
+      "Super Cheap Cars": {
+        "cars": [
+            {
+              "maker": "Toyota",
+              "model": "Carolla",
+              "modelYear": 1999,
+              "mileageKM": 190344,
+              "askingPrice": 10599
+            },
+            {
+              "maker": "Toyota",
+              "model": "RAV4",
+              "modelYear": 2007,
+              "mileageKM": 140321,
+              "askingPrice": 20349
+            }
+        ],
+        "staff": [
+          {
+            "name": "Mark Shurman",
+            "age": 42,
+            "yearlyWage": 5000
+          },
+          {
+            "name": "Grace Shurman",
+            "age": 42,
+            "yearlyWage": 5000
+          },
+          {
+            "name": "Kevin Shurman",
+            "age": 14,
+            "yearlyWage": 1000
+          }
+        ]
+      }
+    },
+    "Electric Galore": {
+      "cars": [
+        {
+          "maker": "Rivian",
+          "model": "R1T",
+          "modelYear": 2022,
+          "mileageKM": 0,
+          "askingPrice": 100000
+        },
+        {
+          "maker": "Rivian",
+          "model": "R1S",
+          "modelYear": 2022,
+          "mileageKM": 0,
+          "askingPrice": 150000
+        }
+      ],
+      "staff": [
+        {
+          "name": "Maia Sunders",
+          "age": 50,
+          "yearlyWage": 30000
+        }
+      ]
+    }
+}

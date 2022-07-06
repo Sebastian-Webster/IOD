@@ -1,0 +1,69 @@
+{
+  "authors": [
+    {
+      "id": 1,
+      "name": "Michiel Mulders",
+      "genre": "fiction"
+    },
+    {
+      "name": "Sebastian Webster",
+      "genre": "non-fiction",
+      "id": 2
+    },
+    {
+      "name": "Jeff Kinney",
+      "genre": "fiction",
+      "id": 3
+    }
+  ],
+  "books": [
+    {
+      "id": 1,
+      "title": "some title",
+      "authorId": 1
+    },
+    {
+      "title": "Diary of an Energetic Kid",
+      "authorId": 2,
+      "id": 2
+    },
+    {
+      "title": "The Amazing World of Gumball",
+      "authorId": 2,
+      "id": 3
+    },
+    {
+      "title": "Sebastian's Coding Adventures",
+      "authorId": "2",
+      "id": 4
+    },
+    {
+      "title": "Seb",
+      "authorId": "2",
+      "id": 5
+    },
+    {
+      "title": "Test",
+      "authorId": "2",
+      "id": 6
+    },
+    {
+      "title": "Diary of a Wimpy Kid",
+      "authorId": "3",
+      "id": 7
+    },
+    {
+      "title": "How to code in HTML",
+      "authorId": "2",
+      "id": 8
+    },
+    {
+      "title": "How to code in CSS",
+      "authorId": "2",
+      "id": 9
+    }
+  ],
+  "library": {
+    "name": "City library"
+  }
+}
