@@ -5,6 +5,132 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        
+        <div class="addBorderAndSpace">
+            <h1>Count People</h1>
+            <h3>See how many people are in the people object.</h3>
+            <button onclick="countPeopleButtonPress()">Press me</button>
+            <p id="peopleCount"></p>
+        </div>
+        <div class="addBorderAndSpace">
+            <h1>Count Companies</h1>
+            <h3>See how many companies are in the companies object.</h3>
+            <button onclick="countCompaniesButtonPress()">Press me</button>
+            <p id="companyCount"></p>
+        </div>
+        <div class="addBorderAndSpace">
+            <h1>Create a People List</h1>
+            <h3>Create a list to see how many people are in the people object</h3>
+            <button onclick="createPeopleListButtonPress()">Press me</button>
+            <div id="peopleList"></div>
+        </div>
+        <div class="addBorderAndSpace">
+            <h1>Create a Companies List</h1>
+            <h3>Create a list to see how many companies are in the companies object</h3>
+            <button onclick="createCompanyListButtonPress()">Press me</button>
+            <div id="companyList"></div>
+        </div>
+        <div class="addBorderAndSpace">
+            <h1>Create a Companies Table</h1>
+            <h3>Create a table to see how many companies are in the companies object</h3>
+            <button onclick="createCompanyTableButtonPress()">Press me</button>
+            <div id="companyTable"></div>
+        </div>
+        <div class="addBorderAndSpace">
+            <h1>Create a People Table</h1>
+            <h3>Create a table to see how many people are in the people object</h3>
+            <button onclick="createPeopleTableButtonPress()">Press me</button>
+            <div id="peopleTable"></div>
+        </div>
+        <div class="addBorderAndSpace">
+            <h1>Get Person's Job</h1>
+            <h3>Enter a person's name to see what company they work at.</h3>
+            <form id="getCompanyForm">
+                <label>Person's Name: <input type="text" name="name"></label>
+                <input type="submit">
+            </form>
+            <p id="getCompanyResultText"></p>
+        </div>
+        <div class="addBorderAndSpace">
+            <h1>Get Category for a Company someone works at</h1>
+            <h3>Enter a person's name to see their company's category.</h3>
+            <form id="getCompanyCategoryForm">
+                <label>Person's Name: <input type="text" name="name"></label>
+                <input type="submit">
+            </form>
+            <p id="getCompanyCategoryResultText"></p>
+        </div>
+        <div class="addBorderAndSpace">
+            <h1>Get Person's Company Start Year</h1>
+            <h3>Enter a person's name to see what year the company they work at started out.</h3>
+            <form id="getCompanyStartYearForm">
+                <label>Person's Name: <input type="text" name="name"></label>
+                <input type="submit">
+            </form>
+            <p id="getCompanyStartYearResultText"></p>
+        </div>
+        <div class="addBorderAndSpace">
+            <h1>Get Company's Start Year</h1>
+            <h3>Enter a company's name to see what year the company started out.</h3>
+            <form id="getCompanyStartYearFromCompanyNameForm">
+                <label>Company's Name: <input type="text" name="name"></label>
+                <input type="submit">
+            </form>
+            <p id="getCompanyStartYearFromCompanyNameResultText"></p>
+        </div>
+        <div class="addBorderAndSpace">
+            <h1>Add a Person</h1>
+            <h3>Add a person to the people object</h3>
+            <form id="addPersonForm">
+                <label>Name: <input type="text" name="name"></label>
+                <br>
+                <label>Street Address: <input type="text" name="street"></label>
+                <br>
+                <label>Suburb: <input type="text" name="suburb"></label>
+                <br>
+                <label>Company: <input type="text" name="company"></label>
+                <input type="submit">
+            </form>
+            <p id="addPersonResultText"></p>
+        </div>
+        <div class="addBorderAndSpace">
+            <h1>Add a Company</h1>
+            <h3>Add a company to the companies object</h3>
+            <form id="addCompanyForm">
+                <label>Name: <input type="text" name="name"></label>
+                <br>
+                <label>Category: <input type="text" name="category"></label>
+                <br>
+                <label>Start: <input type="text" name="start"></label>
+                <br>
+                <label>End: <input type="text" name="end"></label>
+                <input type="submit">
+            </form>
+            <p id="addCompanyResultText"></p>
+        </div>
+        <div class="addBorderAndSpace">
+            <h1>Change a person's job</h1>
+            <h3>Stop a person working from one company, and make them start working at a different company.</h3>
+            <form id="changeCompanyForm">
+                <label>Person's Name: <input type="text" name="nameOfPerson"></label>
+                <br>
+                <label>The name of the company they will work at: <input type="text" name="nameOfNewCompany"></label>
+                <input type="submit">
+            </form>
+            <p id="changeCompanyResultText"></p>
+        </div>
+        <div class="addBorderAndSpace">
+            <h1>Change a person's address</h1>
+            <h3>If the person has moved, you can change their address here.</h3>
+            <form id="changeAddressForm">
+                <label>Person's Name: <input type="text" name="nameOfPerson"></label>
+                <br>
+                <label>Name of New Street Address: <input type="text" name="nameOfNewStreetAddress"></label>
+                <br>
+                <label>Name of New Suburb: <input type="text" name="nameOfNewSuburb"></label>
+                <input type="submit">
+            </form>
+            <p id="changeAddressResultText"></p>
+        </div>
+        <script src="CompaniesJSONExercise.js"></script>
     </body>
 </html>
