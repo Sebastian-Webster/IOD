@@ -48,7 +48,9 @@ function addPerson(new_name, new_street, new_suburb, new_company)
 //This function adds a new company to the companies object and prints a confirmation message
 function addCompany(new_name, new_category, new_start, new_end)
 {
-
+    companies.push({name: new_name, category: new_category, start: new_start, end: new_end})
+    console.log(companies)
+    console.log('Added ' + new_name + ' to the companies list')
 }
 
 //This function prints and returns how many people exist
@@ -61,7 +63,7 @@ function countPeople()
 //This function prints and returns how many companies exist
 function countCompanies()
 {
-
+    return companies.length
 }
 
 //This function generates a HTML list of all the people names
@@ -81,7 +83,18 @@ function createPeopleList()
 //This function generates a HTML list of all the company names
 function createCompanyList()
 {
+    let html = "<table><thead><tr><th>Name</th><th>Category</th><th>Start Year</th><th>End Year</th><tbody>"
 
+    companies.map(company => {
+        html += "<tr>"
+        html += "<td>" + company.name + "</td>"
+        html += "<td>" + company.category + "</td>"
+        html += "<td>" + company.start + "</td>"
+        html += "<td>" + company.end + "</td"
+        html += "</tr>"
+    })
+    
+    html += "</tbody></table>"
 }
 
 //This function changes the company of the given person to the new value and prints a confirmation message
@@ -100,7 +113,10 @@ function changeCompany(person_name, new_company)
 //This function changes the address of the given person to the new value and prints a confirmation message
 function changeAddress(person_name, new_street, new_suburb)
 {
-
+    const personIndex = people.findIndex(person => person.name === person_name)
+    const newPersonData = people[personIndex];
+    newPersonData.address = {street: new_street, new_suburb}
+    people[personIndex] = newPersonData;
 }
 
 //This function gets the company category for a given person and prints and returns the category value
@@ -159,18 +175,32 @@ function generatePeopleTable()
 function generateCompanyTable()
 {
     let html = '<table>';
-    html += '<thead><tr> <th>Name</th> <th>Category</th> <th>Start</th> <th>End</th> </tr></thead>';
-    for (i = 0; i < people.length; i++)
+    html += '<thead><tr> <th>Name</th> <th>Category</th> <th>Start</th> <th>End</th> </tr></thead><tbody>';
+    for (i = 0; i < companies.length; i++)
     {
-    
+        html += "<tr>"
+        html += "<td>" + companies[i].name + "</td>"
+        html += "<td>" + companies[i].category + "</td>"
+        html += "<td>" + companies[i].start + "</td>"
+        html += "<td>" + companies[i].end + "</td>"
+        html += "</tr>"
     }
-    html += '</table>';
+    html += '</tbody></table>';
 
     return html;
 }
 
 
 //TODO: Create functions to remove a person; to remove a company
+function removePerson(personName) {
+    people.splice(people.findIndex(person => person.name === personName), 1)
+    console.log('Successfully removed ' + personName)
+}
+
+function removeComany(companyName) {
+    companies.splice(companies.findIndex(company => company.name == companyName), 1)
+    console.log('Successfully removed ' + companyName)
+}
 
 //TODO: Build HTML with forms and buttons to use the above functions (similar to calculator example) and display results
 
@@ -179,3 +209,4 @@ countPeople();
 changeCompany('Jill', 'Company Five');
 getCompanyCategory('John');
 console.log(getCompanyStartYear('John'))
+console.log(countCompanies())
