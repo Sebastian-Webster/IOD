@@ -1,0 +1,12 @@
+body {
+    margin: 0px;
+}
+h1 {
+    text-align: center;
+}
+footer, header {
+    background-color: #f76e6e;
+}
+dd {
+    margin: 0px;
+}

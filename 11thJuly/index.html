@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<!-- This is how HTML comments look like -->
+<html>
+<!-- the title will appear on the page-->
+<head>
+    <title>Employee Interests Survey</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <!--Adds a heading to the form-->
+    <header>
+        <h1>Employee Interests Survey form</h1>
+    </header>
+    <!-- as it is a survey form, we will need to submit the details, hence we use form -->
+    <!-- We can give absolute url, or relative url like /nextpage.jsp, and specify POST or GET method -->
+    <form id="inputForm">
+        <!-- If we remove this, every thing will move to the left of the page-->
+        <div style="text-align: center;">
+            <div style="text-align: left;display: inline-block;">
+                <form id="inputForm">
+                    <p>Enter your name:</p>
+                    <input type="text" name="UserName" size=35 maxlength=35 value=""/>
+                    <p>Enter your department:</p>
+                    <input type="text" name="Deptt" size=35 maxlength=35 value=""/>
+                    <p>Tell us a little about yourself:</p>
+                    <textarea name="Comments" cols=30 rows=4></textarea>
+                    <p>Do you exercise at home?</p>
+                    <label for="yes">Yes</label>
+                    <input type="radio" name="yes" value=1>
+                    <label for="no">No</label>
+                    <input type="radio" name="no" value=2>
+                    <p>How do you like to read about your favorite topics?</p>
+                    <input type="checkbox" name="Books">Books
+                    <input type="checkbox" name="Web">Online resources
+                    <input type="checkbox" name="Phone">Phone apps
+                    <input type="checkbox" name="Magazines">Magazines
+                    <p>What genre of movies do you like?</p>
+                    <select name="moviepref" >
+                        <option value=1 selected = "true">comedy</option>
+                        <option value=2 >romance</option>
+                        <option value=3 >thriller</option>
+                        <option value=4 >horror</option>
+                        <option value=5 >biopic</option>
+                    </select>
+                </form>
+            </div>
+            <br>
+            <input type="submit" value="Submit Form">
+        </div>
+    </form>
+    <br>
+    <!--This is a comment-->
+    <!--
+        This is a multi-line comment
+    -->
+    <address align="center">
+        Created by <a href="mailto:sebastian.webster.nz@me.com">Sebastian Webster</a>.<br> 
+        Visit me at:<br>
+        <a href="https://sebastian-webster.github.io">sebastian-webster.github.io (website coming soon)</a>
+    </address>
+    <footer>
+        <p style="text-align: center;font-size: 20pt;">This is a footer. This is <em>emphasized text</em> and this is <strong>strong text (important text).</strong> This is <em><strong>strong (important) and emphasized text.</strong></em></h1>
+    </footer>
+</body>
+<script src="index.js"></script>
+</html>

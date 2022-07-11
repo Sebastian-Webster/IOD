@@ -1,0 +1,37 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+#sebNavBar {
+    background-color: gray;
+    overflow: hidden;
+}
+a {
+    display: block;
+    float: left;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: white;
+    background-color: black;
+}
+a:last-child {
+    display: none;
+}
+a:hover {
+    cursor: pointer;
+    background-color: red;
+}
+
+@media screen and (max-width: 600px) {
+    a {
+        display: none;
+    }
+    a:first-child {
+        display: block;
+        float: left;
+    }
+    a:last-child {
+        display: block;
+        float: right;
+    }
+}

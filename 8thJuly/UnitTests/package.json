@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "test": "jest",
+    "getCoverage": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^28.1.2"
+  }
+}

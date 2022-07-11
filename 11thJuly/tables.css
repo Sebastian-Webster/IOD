@@ -1,0 +1,58 @@
+.rowsHaveDifferentColors tr {
+    background-color: #ed7575;
+}
+.rowsHaveDifferentColors tr:nth-child(even) {
+    background-color: #a82828;
+    color: white;
+}
+td {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.changingColors {
+    animation: rainbowBackground 10s infinite;
+}
+@keyframes rainbowBackground {
+    0% {
+        color: black;
+        background-color: red;
+    }
+    16.67% {
+        background-color: orange;
+    }
+    33.33% {
+        background-color: yellow;
+    }
+    50% {
+        background-color: green;
+        color: black;
+    }
+    66.67% {
+        background-color: blue;
+        color: white;
+    }
+    83.33% {
+        color: white;
+        background-color: indigo;
+    }
+    100% {
+        color: black;
+        background-color: red;
+    }
+}
+.tableWithBorders tbody td {
+    border-left: 1px solid black;
+}
+.tableWithBorders tbody td:first-child {
+    border-left: none;
+}
+.tableWithBorders {
+    border: 1px solid black;
+}
+.tableWithBorders th {
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+}
+.tableWithBorders th:first-child {
+    border-left: none;
+}
