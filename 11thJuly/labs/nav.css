@@ -21,6 +21,11 @@ a:hover {
     cursor: pointer;
     background-color: red;
 }
+.responsive > a {
+    float: none;
+    display: block;
+    text-align: left;
+}
 
 @media screen and (max-width: 600px) {
     a {
