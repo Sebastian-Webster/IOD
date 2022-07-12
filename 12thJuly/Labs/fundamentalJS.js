@@ -30,7 +30,7 @@ console.log(+a + +b);
 //Question 4
 console.log(5 > 4) //True
 console.log("apple" > "pineapple") //False
-console.log("2" > "12") //False
+console.log("2" > "12") //True
 console.log(undefined == null) //True
 console.log(undefined === null) //False
 console.log(null == "\n0\n") //False
