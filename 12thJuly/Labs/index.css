@@ -1,0 +1,43 @@
+body, html {
+    margin: 0px;
+    height: 100%;
+    padding: 0px;
+}
+
+.parallax {
+
+    /* Amount of space the image will take up */
+    height: 80%;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /*Center items*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#sunset1 {
+    background-image: url(images/sunset.jpg);
+}
+
+#sunset2 {
+    background-image: url(images/sunset2.jpg);
+}
+
+#sunset3 {
+    background-image: url(images/sunset3.webp);
+}
+
+.parallax > h1 {
+    color: white;
+}
+
+h1 {
+    text-align: center;
+}
