@@ -96,12 +96,20 @@ ladder.up().up().down().showStep() //1
 
 //Question 10
 const prompt = () => Math.round(Math.random() * 10)
+/*
 class Accumulator {
     constructor(startingValue) {
         this.value = startingValue
     }
 
     read = () => {
+        this.value += +prompt('Write a number:')
+    }
+}*/
+
+function Accumulator(startingValue) {
+    this.value = startingValue
+    this.read = () => {
         this.value += +prompt('Write a number:')
     }
 }
