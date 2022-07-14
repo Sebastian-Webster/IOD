@@ -143,7 +143,18 @@ keys.push('more')
 console.log(keys)
 //End of Question 7
 
-//Start Question 8 -- skipping for now --
+//Start Question 8
+let messagesHaveBeenRead = new WeakMap()
+let messages = [
+    {text: "Hello", from: "John"},
+    {text: "How goes?", from: "John"},
+    {text: "See you soon", from: "Alice"}
+]
+messages.forEach((message, index) => {
+    messagesHaveBeenRead.set(message, index % 2 === 0 ? true : false);
+})
+console.log(messagesHaveBeenRead.get(messages[0]))
+console.log(messagesHaveBeenRead.get(messages[1]))
 //End of Question 8
 
 //Start of Question 9
@@ -188,3 +199,33 @@ function getSecondsToday() {
 
 console.log(getSecondsToday())
 //End Question 11
+
+//Start of Question 12
+let room = {
+    number: 23
+}
+
+let meetup = {
+    title: "Conference",
+    occupiedBy: [{name: "John"}, {name: "Alice"}],
+    place: room
+}
+
+//Circular references
+room.occupiedBy = meetup;
+meetup.self = meetup;
+
+function circularReferenceRemover(key, value) {
+    const seen = new WeakSet(); //Create a WeakSet (an array but all values are unique)
+    return (key, value) => { //Return replacer function to JSON.stringify
+        if (typeof value === 'object' && value !== null) { //If the value is an object (only objects can have circular references (refer to themselves))
+            if (seen.has(value)) { //If the value is already in the WeakSet (that will be the circular reference)
+                return undefined; //Tell JSON.stringify to not include the circular reference in the stringified string
+            }
+            seen.add(value) // If the value has not already in the WeakSet (not a circular reference) add it to spot any circular references.
+        }
+        return value; //If the value is a primitive type or is not already in the WeakSet then tell JSON.stringify to add it to the string.
+    }
+}
+
+console.log(JSON.stringify(meetup, circularReferenceRemover()))
