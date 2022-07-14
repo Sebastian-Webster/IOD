@@ -40,7 +40,8 @@ app.post('/uploadBowlingPlayers', upload.none(), (req, res) => {
     }
     html += '</tbody></table>'
     html += '</body><script>'
-    html += '' //Script goes here
+    html += `var numberOfRounds = ${+numOfRounds}`
+    html += `function updatePlayer(playerNumber) {let values = []; for (let roundNum = 1; i < numOfRounds + 1; roundNum++) {values.push(document.getElementById(playerNumber + '-round' + roundNum))}; let total = values.reduce((accumulator, numberToAdd) = {if (isNaN(numberToAdd)) return accumulator; return accumulator + numberToAdd;}); document.getElementById(playerNumber + '-result').innerHTML = total;}`
     html += '</script></html>'
     res.send(html);
 })
