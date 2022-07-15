@@ -12,13 +12,15 @@ function truncate(str, maxLength) {
     if (typeof str !== 'string' || typeof maxLength !== 'number') return console.error('Wrong data type provided to truncate()')
     if (maxLength < 4) console.warn('No characters are going to be shown if a maxLength of less than 4 is provided to truncate()')
     if (maxLength > str.length) return str
-
+    /*
     let splitString = str.split("");
     let newString = '';
     for (let i = 0; i < maxLength - 3; i++) {
         newString += splitString[i]
     }
     return newString + '...';
+    */
+    return str.length > maxLength ? str.substring(0, maxLength - 3) + '...' : str
 }
 
 console.log(truncate('abcdefghijklmnopqrstuvwxyz', 6))
@@ -215,6 +217,7 @@ let meetup = {
 room.occupiedBy = meetup;
 meetup.self = meetup;
 
+/*
 function circularReferenceRemover(key, value) {
     const seen = new WeakSet(); //Create a WeakSet (an array but all values are unique)
     return (key, value) => { //Return replacer function to JSON.stringify
@@ -227,5 +230,9 @@ function circularReferenceRemover(key, value) {
         return value; //If the value is a primitive type or is not already in the WeakSet then tell JSON.stringify to add it to the string.
     }
 }
+*/
 
-console.log(JSON.stringify(meetup, circularReferenceRemover()))
+console.log(JSON.stringify(meetup, function(key,value) {
+    if (key != '' && value == meetup) return undefined;
+    else return value;
+}))

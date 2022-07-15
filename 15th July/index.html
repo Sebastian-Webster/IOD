@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Pokemon Getter</title>
+        <link rel="stylesheet" href="pokemon.css">
+    </head>
+    <body>
+        <h1>Sebastian's Pokemon Getter</h1>
+        <div id="pokemonDiv">
+            <h3 id="pokemonName">Loading Pokemon...</h3>
+            <h4 id="pokemonBestNumber">Checking pokemon status...</h4>
+            <p id="hpStat">Checking pokemon HP base stat...</p>
+            <p id="attackStat">Checking pokemon attack base stat...</p>
+            <p id="defenseStat">Checking pokemon defense base stat...</p>
+            <p id="specialAttackStat">Checking pokemon special-attack base stat...</p>
+            <p id="specialDefenseStat">Checking pokemon special-defense base stat...</p>
+            <p id="speedStat">Checking pokemon speed base stat...</p>
+            <img id="pokemonImage" src="images/loading_icon.gif" width="200px" height="200px">
+            <br>
+            <div id="pokemonDivButtons">
+                <button onclick="changePokemon('previousPokemon')">Previous</button>
+                <button onclick="changePokemon('nextPokemon')">Next</button>
+            </div>
+            <br><br>
+            <div>
+                <form id="goToPokemonNumber">
+                    <label>Enter pokemon number: <input type="number" name="pokemonNumber"></label>
+                    <input type="submit" value="Find Pokemon">
+                </form>
+            </div>
+        </div>
+    </body>
+    <script src="pokemon.js"></script>
+</html>
