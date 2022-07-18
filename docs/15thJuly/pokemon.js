@@ -1,3 +1,6 @@
+//https://pokeapi.co/docs/v2
+//PokeAPI documentation
+
 const dataMap = new Map([['previousPokemon', null], ['nextPokemon', null]]);
 
 function getPromise(URL) {
