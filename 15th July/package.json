@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "lodash": "^4.17.21",
+    "node-fetch": "^3.2.8",
     "prompt-sync": "^4.2.0",
     "xhr2": "^0.2.1"
-  }
+  },
+  "type": "module"
 }

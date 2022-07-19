@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Templates</title>
+        <style>
+            .artistCard {
+                display: flex;
+                flex-direction: row;
+            }
+            .leftSideArtistCard {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                width: 33%;
+            }
+            .rightSideArtistCard {
+                width: 66%;
+                display: flex;
+                flex-direction: row;
+                justify-content: 'flex-end';
+                align-items: flex-end;
+            }
+            img {
+                width: 100%
+            }
+            #artistCard {
+                border: 1px solid black;
+                margin-bottom: 20px;
+            }
+            .artistHasNoPaintingsWarning {
+                text-align: center;
+            }
+            .paintingCard {
+                margin-bottom: 10px;
+                margin-top: 10px;
+            }
+            header {
+                position: -webkit-sticky; /* Safari */
+                position: sticky;
+                top: 0;
+                background-color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Templates</h1>
+            <div id="artistButtons">
+                <button id="nextArtistButton" onclick="artistButtonPress('next')">Show next artist</button>
+                <button id="previousArtistButton" onclick="artistButtonPress('previous')">Show previous artist</button>
+            </div>
+        </header>
+        <div id="artistContainer"></div>
+        <template id="artistInfoTemplate">
+            <div id="artistCard">
+                <div class="artistCard">
+                    <div class="leftSideArtistCard">
+                        <h1 class="artistName">Artist name here</h1>
+                        <h3 class="artistDescription">Artist description here</h3>
+                    </div>
+                    <div class="rightSideArtistCard">
+                        <img class="artistImage" src="" alt="">
+                    </div>
+                </div>
+            </div>
+        </template>
+        <template id="headerTemplate">
+            <div style="text-align: center;">
+                <h1>Artist Name</h1>
+                <h2>Some paintings:</h2>
+            </div>
+        </template>
+        <template id="paintingTemplate">
+            <div class="artistCard paintingCard">
+                <div class="leftSideArtistCard">
+                    <h1 class="portfolioPaintingName">Painting Name</h1>
+                    <h3 class="portfolioPaintingDescription">Painting Description</h3>
+                </div>
+                <div class="rightSideArtistCard">
+                    <img class="portfolioPaintingImage" src="" alt="">
+                </div>
+            </div>
+        </template>
+        <template id="noPaintingsTemplate">
+            <div>
+                <h1 class="artistHasNoPaintingsWarning">This artist has no paintings</h1>
+            </div>
+        </template>
+        <script>
+            let currentArtistIndex = -1;
+
+            const artists = [
+                {
+                    artistName: "Vincent Van Gogh",
+                    description: "A very famous artist that cut off his ear",
+                    imageUrl: 'https://www.vincentvangogh.org/images/van-gogh.jpg',
+                    portfolio: [
+                        {
+                            paintingName: 'The Starry Night',
+                            paintingDescription: 'A painting of a starry night.',
+                            imageUrl: 'https://www.moma.org/learn/moma_learning/_assets/www.moma.org/wp/moma_learning/wp-content/uploads/2012/07/Van-Gogh.-Starry-Night-469x376.jpg'
+                        },
+                        {
+                            paintingName: 'Sunflowers',
+                            paintingDescription: 'A painting of sunflowers.',
+                            imageUrl: 'https://iiif.micr.io/tsjHR/full/1200,/0/default.jpg'
+                        }
+                    ]
+                },
+                {
+                    artistName: 'Sebastian Webster',
+                    description: 'Not an artist.',
+                    imageUrl: 'https://sebastian-webster.github.io/images/me.jpg',
+                    portfolio: []
+                },
+                {
+                    artistName: 'Jackson Pollock',
+                    description: 'Paul Jackson Pollock was an American painter and a major figure in the abstract expressionist movement. He was widely noticed for his "drip technique" of pouring or splashing liquid household paint onto a horizontal surface, enabling him to view and paint his canvases from all angles.',
+                    imageUrl: 'https://m.media-amazon.com/images/M/MV5BNzc2YzNlYzctMWE3Yy00NjRjLWEyYWUtNmY4YThjMjc3Yjk1XkEyXkFqcGdeQXVyNjUxMjc1OTM@._V1_.jpg',
+                    portfolio: [
+                        {
+                            paintingName: 'Convergence',
+                            paintingDescription: 'Convergence is a 1952 oil painting by Jackson Pollock.',
+                            imageUrl: 'https://uploads3.wikiart.org/images/jackson-pollock/convergence-1952.jpg'
+                        }, {
+                            paintingName: 'Mural',
+                            paintingDescription: "Mural is a large painting by American artist Jackson Pollock. Although signed and dated 1943, the signature and date were not added until 1947, and the work was probably completed around the fall of 1943. It was made with oil paint on linen, and is Pollock's largest canvas, measuring 2.43 by 6.04 metres.",
+                            imageUrl: 'https://uploads1.wikiart.org/images/jackson-pollock/mural.jpg'
+                        }
+                    ]
+                }
+            ]
+
+            function artistButtonPress(action) {
+                if (action == 'next') {
+                    const artistIndexToShow = currentArtistIndex + 1;
+                    if (artists[artistIndexToShow]) {
+                        showContent(artistIndexToShow)
+                        currentArtistIndex = artistIndexToShow
+                        changeButtonText(currentArtistIndex)
+                    } else {
+                        showContent(0)
+                        currentArtistIndex = 0;
+                        changeButtonText(currentArtistIndex)
+                    }
+                } else {
+                    const artistIndexToShow = currentArtistIndex - 1;
+                    if (artists[artistIndexToShow]) {
+                        showContent(artistIndexToShow)
+                        currentArtistIndex = artistIndexToShow
+                        changeButtonText(currentArtistIndex)
+                    } else {
+                        currentArtistIndex = artists.length - 1;
+                        showContent(currentArtistIndex)
+                        changeButtonText(currentArtistIndex)
+                    }
+                }
+            }
+
+            function changeButtonText(artistIndexShowing) {
+                const nextButton = document.getElementById('nextArtistButton')
+                const previousButton = document.getElementById('previousArtistButton')
+
+                //Set next button text
+                if (artistIndexShowing + 1 >= artists.length) {
+                    nextButton.textContent = `Show next artist - ${artists[0].artistName}`
+                } else {
+                    nextButton.textContent = `Show next artist - ${artists[artistIndexShowing + 1].artistName}`
+                }
+
+                //Set previous button text
+                if (artistIndexShowing == -1) {
+                    previousButton.textContent = `Show last artist - ${artists[artists.length - 1].artistName}`
+                } else if (artistIndexShowing - 1 < 0) {
+                    previousButton.textContent = `Show previous artist - ${artists[artists.length - 1].artistName}`
+                } else {
+                    previousButton.textContent = `Show previous artist - ${artists[artistIndexShowing - 1].artistName}`
+                }
+            }
+
+            changeButtonText(currentArtistIndex)
+
+            function removeChildNodes(parent) {
+                while(parent.firstChild) {
+                    parent.removeChild(parent.firstChild)
+                }
+            }
+
+            function showContent(i) {
+                const artistContainer = document.getElementById('artistContainer')
+                removeChildNodes(artistContainer)
+                //Start of Artist Card
+                let artistCardTemplate = document.getElementById('artistInfoTemplate')
+                let cardDiv = artistCardTemplate.content.getElementById('artistCard');
+                let card = document.importNode(cardDiv, true)
+                card.getElementsByClassName('artistName')[0].textContent = artists[i].artistName;
+                card.getElementsByClassName('artistDescription')[0].textContent = artists[i].description;
+                card.getElementsByClassName('artistImage')[0].setAttribute('alt', 'Photo of ' + artists[i].artistName)
+                card.getElementsByClassName('artistImage')[0].setAttribute('src', artists[i].imageUrl)
+                //End of Artist Card
+
+                //Start of Artist Portfolio
+                if (artists[i].portfolio.length) {
+                    let headerTemplate = document.getElementById('headerTemplate')
+                    let paintingTemplate = document.getElementById('paintingTemplate')
+                    let headerTemplateCopy = document.importNode(headerTemplate.content.querySelector('div'), true)
+                    headerTemplateCopy.getElementsByTagName('h1')[0].textContent = artists[i].artistName
+                    for (let a = 0; a < artists[i].portfolio.length; a++) {
+                        let paintingTemplateCopy = document.importNode(paintingTemplate.content.querySelector('div'), true)
+                        paintingTemplateCopy.getElementsByClassName('portfolioPaintingName')[0].textContent = artists[i].portfolio[a].paintingName
+                        paintingTemplateCopy.getElementsByClassName('portfolioPaintingDescription')[0].textContent = artists[i].portfolio[a].paintingDescription
+                        paintingTemplateCopy.getElementsByClassName('portfolioPaintingImage')[0].setAttribute('alt', `Photo of a painting called ${artists[i].portfolio[a].paintingName}`)
+                        paintingTemplateCopy.getElementsByClassName('portfolioPaintingImage')[0].setAttribute('src', artists[i].portfolio[a].imageUrl)
+                        headerTemplateCopy.appendChild(paintingTemplateCopy)
+                    }
+                    card.appendChild(headerTemplateCopy)
+                } else {
+                    let noPaintingsTemplate = document.getElementById('noPaintingsTemplate')
+                    let noPaintingsTemplateCopy = document.importNode(noPaintingsTemplate.content.querySelector('div'), true);
+                    noPaintingsTemplateCopy.getElementsByTagName('h1')[0].textContent = `${artists[i].artistName} has no paintings.`
+                    card.appendChild(noPaintingsTemplateCopy)
+                }
+                //End of Artist Portfolio
+                window.scrollTo(0, 0)
+                artistContainer.appendChild(card)
+            }
+
+            if (!Array.isArray(artists) || artists.length < 1) {
+                removeChildNodes(document.body)
+                document.write('No artists to display')
+            } else if (artists.length == 1) {
+                document.body.removeChild(document.getElementById('artistButtons'))
+                showContent(0)
+            }
+
+        </script>
+    </body>
+</html>
