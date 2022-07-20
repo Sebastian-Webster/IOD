@@ -1,0 +1,16 @@
+1. Get Data
+
+The user must be able to enter two numbers with two different text boxes seperated apart from each other.
+
+2. Choose an operator
+
+Once the user has entered the two numbers, the user can press an operator button (+, -, *, /) with their respective symbols.
+
+3. Get the result
+
+Once the use rpressed an operator button, the calculator will calculate the result and display it on the screen.
+
+4. Reset the screen
+
+Once the result is displayed, clear the number input text inputs. If the user enters new numbers and creates a new calculation remove the current result being displayed on the screen and show the new result instead.
+

@@ -1,0 +1,80 @@
+.flexBoxRow, .operatorButtonsRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.flexBoxColumn {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.operatorButton {
+    width: 150px;
+    aspect-ratio: 1;
+    font-size: 50pt;
+}
+
+.operatorText {
+    font-size: 60pt;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.numberHeading {
+    font-size: 40pt;
+}
+
+input[type='number'] {
+    height: 50px;
+    width: 300px;
+}
+
+.flexBoxCenterColumn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#resultText {
+    font-size: 70pt;
+}
+
+#result {
+    font-size: 50pt;
+}
+
+@media only screen and (max-width: 800px) {
+    .numberHeading {
+        font-size: 30pt;
+    }
+    .operatorButton {
+        width: 100px;
+    }
+    .operatorText {
+        font-size: 40pt;
+    }
+    input[type='number'] {
+        height: 40px;
+        width: 200px;
+    }
+    #resultText {
+        font-size: 50pt;
+    }
+    #result {
+        font-size: 30pt;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .flexBoxRow {
+        flex-direction: column;
+    }
+
+    .flexBoxColumn {
+        flex-direction: row;
+    }
+}

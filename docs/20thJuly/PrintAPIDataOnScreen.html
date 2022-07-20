@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            html, head, body {
+                margin: 0%;
+                padding: 0%;
+            }
+            table {
+                border: 1px solid black;
+            }
+            td {
+                border-left: 2px solid black;
+                padding-left: 10px;
+                padding-right: 10px;
+                background-color: #e77070;
+            }
+            td:first-child {
+                border-left: none;
+            }
+            td:nth-child(even) {
+                background-color: #8b2121;
+                color: white;
+            }
+            th {
+                border-bottom: 1px solid black;
+                border-left: 2px solid black;
+                background-color: #e77070;
+            }
+            th:first-child {
+                border-left: none;
+            }
+            th:nth-child(even) {
+                background-color: #8b2121;
+                color: white;
+            }
+            header {
+                text-align: center;
+                animation: rainbowBackgroundColor 10s infinite;
+                padding-bottom: 20px;
+                margin-bottom: 20px;
+            }
+            button {
+                animation: rainbowBackgroundColor 10s infinite;
+                background-color: black;
+                border: 1px solid black;
+                padding: 30px;
+                border-radius: 10px;
+                font-size: 20pt;
+                font-weight: bold;
+                cursor: pointer;
+            }
+            button:active {
+                transform: scale(0.9);
+            }
+            #apiData {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            @keyframes rainbowBackgroundColor {
+                0% {
+                    background-color: red;
+                }
+                16.67% {
+                    background-color: orange;
+                }
+                33.34% {
+                    background-color: yellow;
+                }
+                50% {
+                    background-color: green;
+                    color: black;
+                }
+                66.67% {
+                    background-color: blue;
+                    color: white;
+                }
+                83.34% {
+                    background-color: indigo;
+                    color: white;
+                }
+                100% {
+                    background-color: red;
+                    color: black;
+                }
+            }
+        </style>
+        <script>
+            function removeChildNodes(parent) {
+                while (parent.firstChild) {
+                    parent.removeChild(parent.firstChild);
+                }
+            }
+
+            function capitalizeFirstLetter(str) {
+                return str.charAt(0).toUpperCase() + str.slice(1);
+            }
+
+            function myFunction() {
+                let apiData = document.getElementById('apiData');
+                removeChildNodes(apiData);
+                fetch('https://pokeapi.co/api/v2/pokemon?limit=50').then(function(response) {
+                    return response.json();
+                }).then(function(data) {
+                    console.log(data);
+                    //Printing results to the screen in a table
+                    let table = document.createElement('table')
+
+                    table.cellSpacing = 0
+
+                    let tableHead = document.createElement('thead')
+                    let tableHeaderRow = document.createElement('tr')
+                    let nameHeader = document.createElement('th')
+                    let URLHeader = document.createElement('th')
+
+                    nameHeader.textContent = 'Name'
+                    URLHeader.textContent = 'URL'
+
+                    tableHeaderRow.appendChild(nameHeader)
+                    tableHeaderRow.appendChild(URLHeader)
+
+                    tableHead.appendChild(tableHeaderRow)
+
+                    table.appendChild(tableHead)
+
+                    let tableBody = document.createElement('tbody')
+                    for (let item of data.results) {
+                        let infoRow = document.createElement('tr')
+                        let nameBox = document.createElement('td')
+                        let urlBox = document.createElement('td')
+
+                        nameBox.textContent = capitalizeFirstLetter(item.name)
+                        urlBox.textContent = item.url
+
+                        infoRow.appendChild(nameBox)
+                        infoRow.appendChild(urlBox)
+
+                        tableBody.appendChild(infoRow)
+                    }
+
+                    table.appendChild(tableBody)
+
+                    apiData.appendChild(table)
+                    //End of printing results to the screen in a table
+
+                    //Write results to the screen
+                    for (let item of data.results) {
+                        let element = document.createElement('p')
+                        element.textContent = capitalizeFirstLetter(item.name)
+                        apiData.appendChild(element)
+                    }
+                    //End of writing results to the screen
+
+                }).catch(error  => {
+                    console.log("Booo");
+                    console.log(error)
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <header>
+            <h2>JavaScript HTML DOM</h2>
+            <button onclick="myFunction()">Click me</button>
+        </header>
+        <div id="apiData"></div>
+    </body>
+</html>
