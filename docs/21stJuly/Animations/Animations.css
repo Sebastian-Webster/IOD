@@ -1,0 +1,40 @@
+.colorChanging {
+    animation: colorChange 10s infinite
+}
+
+.square {
+    width: 100px;
+    height: 100px;
+}
+
+@keyframes colorChange {
+    12.5% {
+        background-color: red;
+        color: black;
+    }
+    25% {
+        background-color: orange;
+    }
+    37.5% {
+        background-color: yellow;
+    }
+    50% {
+        background-color: green;
+        color: black;
+    }
+    62.5% {
+        background-color: blue;
+        color: white;
+    }
+    75% {
+        background-color: indigo;
+        color: white;
+    }
+    87.5% {
+        background-color: violet;
+        color: black;
+    }
+    100% {
+        background-color: red;
+    }
+}

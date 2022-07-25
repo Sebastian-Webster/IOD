@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Moment DateTime Format</title>
+        <!-- reference Moment.js library -->
+        <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"
+        type="text/javascript"></script>
+        <script src="https://momentjs.com/downloads/moment-timezone-with-data.js"></script>
+    </head>
+    <body>
+        <h2>Moment Date</h2>
+        <!-- container for Moment.js output -->
+        <div id="displayMoment"></div>
+        <h2>JavaScript Date</h2>
+        <!-- container for JavaScript Date output -->
+        <div id="displayJsDate"></div>
+        <h1 id="myAge"></h1>
+        <h1 id="timeInLondon"></h1>
+        <h1 id="timeInNewYork"></h1>
+        <script type="text/javascript">
+            (function() {
+                var DOB = "20070522"
+                var timeAgo = moment().diff('2007-05-22', 'days');
+                let years = Math.floor(timeAgo / 365)
+                var age = parseInt(timeAgo)
+                var days = age - years * 365
+                document.getElementById('myAge').textContent = `I am now ${years} years, and ${days} days old!`
+                // instantiate a moment object
+                var NowMoment = moment();
+                // instantiate a JavaScript Date object
+                var NowDate = new Date();
+                // display value of moment object in #displayMoment div
+                var eDisplayMoment = document.getElementById('displayMoment');
+                eDisplayMoment.innerHTML = NowMoment;
+                //console.log("Hello")
+                //console.log(NowMoment)
+                // display value of Date object in #displayJsDate div
+                var eDisplayDate = document.getElementById('displayJsDate');
+                eDisplayDate.innerHTML = NowDate;
+
+                let timeInLondon = moment().tz('Europe/London').format('h:mma z')
+                document.getElementById('timeInLondon').textContent = `Time in London: ${timeInLondon}`
+
+                let timeInNewYork = moment().tz('America/New_York').format('h:mma z');
+                document.getElementById('timeInNewYork').textContent = `Time in New York: ${timeInNewYork}`
+
+                //Figure out how to get the time difference between current time and Singapore time
+            })();
+        </script>
+    </body>
+</html>

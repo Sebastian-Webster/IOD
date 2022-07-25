@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Managing Data</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+    <body>
+        <template id="cardTemplate">
+            <div class="p-3 p-xxl-5">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">I am a button</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </template>
+        <h1 class="text-center" id="updatingTime">News will update in 10 seconds</h1>
+        <form id="addNews" class="d-flex justify-content-center flex-column align-items-center my-3">
+            <h3>Add News:</h3>
+            <h5 class="text-center">If there is news in your local area that you would like to share, add it here:</h5>
+            <label class="my-2">Title: <input type="text" name="title"></label>
+            <label class="my-2">Content: <input type="text" name="content"></label>
+            <input class="mt-2" type="submit" value="Submit News">
+        </form>
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-xxl-4" id="cardContainer"></div>
+        </div>
+        <script>
+            let news = [
+                { id: 1, title: 'News1', content:"bla"},
+                { id: 2, title: 'News2', content:"ble"},
+                { id: 3, title: 'News3', content:"blu"}
+            ];
+
+            function removeChildNodes(parent) {
+                while (parent.firstChild) {
+                    parent.removeChild(parent.firstChild)
+                }
+            }
+
+            function updateNews() {
+                removeChildNodes(document.getElementById('cardContainer'))
+                for (item of news) {
+                    let cardTemplate = document.getElementById('cardTemplate')
+                    let card = cardTemplate.content.cloneNode(true);
+
+                    card.querySelector('.card-title').textContent = item.title
+                    card.querySelector('.card-text').textContent = item.content
+
+                    document.getElementById('cardContainer').appendChild(card)
+                }
+            }
+
+            function handleAddNews(e) {
+                e.preventDefault();
+
+                const form = document.getElementById('addNews');
+
+                if (form.title.value == '') {
+                    alert('You must add a title for the news')
+                    return
+                }
+
+                if (form.content.value == '') {
+                    alert('You must add news content to be able to submit the news.')
+                    return
+                }
+
+                const newsObject = {
+                    id: news.length + 1,
+                    title: form.title.value,
+                    content: form.content.value
+                }
+
+                news.unshift(newsObject)
+
+                form.reset()
+                form.title.focus()
+            }
+
+            updateNews()
+            setInterval(() => {
+                updateNews();
+            }, 10000);
+
+            let secondsUntilUpdate = 10;
+            setInterval(() => {
+                secondsUntilUpdate--;
+                if (secondsUntilUpdate == 0) secondsUntilUpdate = 10;
+                document.getElementById('updatingTime').textContent = 'News will update in ' + secondsUntilUpdate + ' ' + (secondsUntilUpdate == 1 ? 'second' : 'seconds')
+            }, 1000);
+
+            document.getElementById('addNews').addEventListener('submit', handleAddNews)
+        </script>
+    </body>
+</html>
