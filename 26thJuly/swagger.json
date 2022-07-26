@@ -1,0 +1,165 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Sebastian's Calculator",
+        "description": "My Calculator",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Calculator",
+            "description": "API for Calculus in the system"
+        }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/calculator/add": {
+            "get": {
+                "tags": [
+                    "Addition Service"
+                ],
+                "summary": "Adds 2 numbers",
+                "parameters": [
+                    {
+                        "name": "num_1",
+                        "in": "query",
+                        "description": "The First Number"
+                    },
+                    {
+                        "name": "num_2",
+                        "in": "query",
+                        "description": "The Second number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "This service allows you to add two numbers together"
+                    },
+                    "400": {
+                        "description": "Either num_1 or num_2 is not a number. Check what inputs you are supplying to the API and try again."
+                    }
+                }
+            }
+        },
+        "/calculator/subtract": {
+            "get": {
+                "tags": [
+                    "Subtraction Service"
+                ],
+                "summary": "Subtracts 2 numbers",
+                "parameters": [
+                    {
+                        "name": "num_1",
+                        "in": "query",
+                        "description": "The First Number"
+                    },
+                    {
+                        "name": "num_2",
+                        "in": "query",
+                        "description": "The Second number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "This service allows you to subtract a number by a second number"
+                    },
+                    "400": {
+                        "description": "Either num_1 or num_2 is not a number. Check what inputs you are supplying to the API and try again."
+                    }
+                }
+            }
+        },
+        "/calculator/multiply": {
+            "get": {
+                "tags": [
+                    "Multiplication Service"
+                ],
+                "summary": "Multiplies 2 numbers together",
+                "parameters": [
+                    {
+                        "name": "num_1",
+                        "in": "query",
+                        "description": "The First Number"
+                    },
+                    {
+                        "name": "num_2",
+                        "in": "query",
+                        "description": "The Second number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "This service allows you to multiply two numbers together"
+                    },
+                    "400": {
+                        "description": "Either num_1 or num_2 is not a number. Check what inputs you are supplying to the API and try again."
+                    }
+                }
+            }
+        },
+        "/calculator/divide": {
+            "get": {
+                "tags": [
+                    "Division Service"
+                ],
+                "summary": "Divides 2 numbers together",
+                "parameters": [
+                    {
+                        "name": "num_1",
+                        "in": "query",
+                        "description": "The First Number"
+                    },
+                    {
+                        "name": "num_2",
+                        "in": "query",
+                        "description": "The Second number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "This service allows you to divide a number by a second number"
+                    },
+                    "400": {
+                        "description": "Either num_1 or num_2 is not a number. Check what inputs you are supplying to the API and try again."
+                    }
+                }
+            }
+        },
+        "/calculatorV2/exponentation": {
+            "get": {
+                "tags": [
+                    "Exponentation Service"
+                ],
+                "summary": "Raises a number to the power of another number",
+                "parameters": [
+                    {
+                        "name": "num1",
+                        "in": "query",
+                        "description": "The First Number"
+                    },
+                    {
+                        "name": "num2",
+                        "in": "query",
+                        "description": "The Second number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "This service allows you to raise a number to the power of another number"
+                    },
+                    "400": {
+                        "description": "Either num1 or num2 is not a number. Check what inputs you are supplying to the API and try again."
+                    }
+                }
+            }
+        }
+    }
+}

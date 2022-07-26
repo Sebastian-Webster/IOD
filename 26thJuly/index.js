@@ -1,20 +1,38 @@
+var testRoute = require('./routes/myTestRoute');
+var calculatorRoute = require('./routes/calculatorRoute')
+var calculatorV2Route = require('./routes/calculatorV2Route')
+
+var cors = require('cors');
+
 const express = require('express')
-const app = express()
-const port = 3000
+const swaggerUi = require('swagger-ui-express');
+const ports = [80, 443, 3000, 8080]
 
-const app2 = express()
-const port2 = 3001
+const servers = []
 
-app.get('/', express.static('public'))
-
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+ports.forEach(port => {
+    let app = express()
+    
+    servers.push(app)
 })
 
-app2.get('/', (req, res) => {
-    res.send('Hello World! This server is running on port ' + port2)
-})
-
-app2.listen(port2, () => {
-    console.log(`Example app listening at http://localhost:${port2}`)
+servers.forEach((server, index) => {
+    server.use(cors())
+    
+    server.get('/', express.static('public'))
+    
+    server.use('/mytest', testRoute);
+    server.use('/calculator', calculatorRoute)
+    server.use('/calculatorV2', calculatorV2Route)
+    
+    const swaggerDocument = require('./swagger.json');
+    server.use(
+        '/api-docs',
+        swaggerUi.serve,
+        swaggerUi.setup(swaggerDocument)
+    );
+        
+    server.listen(ports[index], () => {
+        console.log(`Example app listening at http://localhost:${ports[index]}`)
+    })
 })
