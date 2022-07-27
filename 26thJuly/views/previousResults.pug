@@ -1,0 +1,17 @@
+html 
+    head 
+        title= title
+    body 
+        if previousResults.length
+            ol
+                for result in previousResults 
+                    li
+                        ul 
+                            li Number 1: #{result.number1}
+                            li Number 2: #{result.number2}
+                            li Result: #{result.result}
+                            li Method: #{result.method}
+                            li Date: #{result.date}
+        else 
+            h1 No Previous Results to show
+                

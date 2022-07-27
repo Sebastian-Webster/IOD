@@ -1,0 +1,160 @@
+html 
+    head 
+        title= title
+    body 
+        h1= message
+
+        p List of vegetables
+
+        ul 
+            for vegetable in vegetables
+                li= vegetable.name 
+                img(src= vegetable.imageURL, width= 100, height= 100)
+
+        a(href='/pug/previousResults') See your previous calculator results
+
+        form(id='additionForm')
+            label(for='num1') Number 1
+            input(name='num1', type='number', placeholder='Number 1')
+            label(for='num2') Number 2
+            input(name='num2', type='number', placeholder='Number 2')
+            button(type='submit') Add
+
+        h1(id='additionResult') Addition Result: 
+
+        form(id='subtractionForm')
+            label(for='num1') Number 1
+            input(name='num1', type='number', placeholder='Number 1')
+            label(for='num2') Number 2
+            input(name='num2', type='number', placeholder='Number 2')
+            button(type='submit') Subtract
+
+        h1(id='subtractionResult') Subtraction Result: 
+
+        form(id='multiplicationForm')
+            label(for='num1') Number 1
+            input(name='num1', type='number', placeholder='Number 1')
+            label(for='num2') Number 2
+            input(name='num2', type='number', placeholder='Number 2')
+            button(type='submit') Multiply
+
+        h1(id='multiplicationResult') Multiplication Result:
+
+        form(id='divisionForm')
+            label(for='num1') Number 1
+            input(name='num1', type='number', placeholder='Number 1')
+            label(for='num2') Number 2
+            input(name='num2', type='number', placeholder='Number 2')
+            button(type='submit') Divide
+
+        h1(id='divisionResult') Division Result:
+
+        form(id='modulusForm')
+            label(for='num1') Number 1
+            input(name='num1', type='number', placeholder='Number 1')
+            label(for='num2') Number 2
+            input(name='num2', type='number', placeholder='Number 2')
+            button(type='submit') Modulus
+
+        h1(id='modulusResult') Modulus Result:
+
+        form(id='exponentForm')
+            label(for='num1') Number 1
+            input(name='num1', type='number', placeholder='Number 1')
+            label(for='num2') Number 2
+            input(name='num2', type='number', placeholder='Number 2')
+            button(type='submit') Exponent
+
+        h1(id='exponentResult') Exponent Result:
+
+        script.
+            function additionFormSubmit(e) {
+                e.preventDefault();
+
+                const form = document.getElementById('additionForm');
+                fetch(`http://localhost:3000/calculator/add/?num_1=${form.num1.value}&num_2=${form.num2.value}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('additionResult').innerHTML = 'Addition Result: ' + data.result;
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+            }
+
+            function subtractionFormSubmit(e) {
+                e.preventDefault();
+
+                const form = document.getElementById('subtractionForm');
+                fetch(`http://localhost:3000/calculator/subtract/?num_1=${form.num1.value}&num_2=${form.num2.value}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('subtractionResult').innerHTML = 'Subtraction Result: ' + data.result;
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+            }
+
+            function multiplicationFormSubmit(e) {
+                e.preventDefault();
+
+                const form = document.getElementById('multiplicationForm');
+                fetch(`http://localhost:3000/calculator/multiply/?num_1=${form.num1.value}&num_2=${form.num2.value}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('multiplicationResult').innerHTML = 'Multiplication Result: ' + data.result;
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+            }
+
+            function divisionFormSubmit(e) {
+                e.preventDefault();
+
+                const form = document.getElementById('divisionForm');
+                fetch(`http://localhost:3000/calculator/divide/?num_1=${form.num1.value}&num_2=${form.num2.value}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('divisionResult').innerHTML = 'Division Result: ' + data.result;
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+            }
+
+            function modulusFormSubmit(e) {
+                e.preventDefault();
+
+                const form = document.getElementById('modulusForm');
+                fetch(`http://localhost:3000/calculator/modulus/?num_1=${form.num1.value}&num_2=${form.num2.value}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('modulusResult').innerHTML = 'Modulus Result: ' + data.result;
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+            }
+
+            function exponentFormSubmit(e) {
+                e.preventDefault();
+
+                const form = document.getElementById('exponentForm');
+                fetch(`http://localhost:3000/calculatorV2/exponentation/?num1=${form.num1.value}&num2=${form.num2.value}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('exponentResult').innerHTML = 'Exponent Result: ' + data.result;
+                })
+                .catch(error => {
+                    console.error(error)
+                })
+            }
+
+            document.getElementById('additionForm').addEventListener('submit', additionFormSubmit)
+            document.getElementById('subtractionForm').addEventListener('submit', subtractionFormSubmit)
+            document.getElementById('multiplicationForm').addEventListener('submit', multiplicationFormSubmit)
+            document.getElementById('divisionForm').addEventListener('submit', divisionFormSubmit)
+            document.getElementById('modulusForm').addEventListener('submit', modulusFormSubmit)
+            document.getElementById('exponentForm').addEventListener('submit', exponentFormSubmit)
