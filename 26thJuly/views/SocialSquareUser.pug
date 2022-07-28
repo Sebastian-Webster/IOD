@@ -1,0 +1,17 @@
+html 
+    head
+        title= name 
+    body
+        div(style='display: flex;justify-content: center;align-items: center;flex-direction: column;')
+            img(src=profileImageURL, width=150, height=150, style="border-radius: 50%;")
+            h1 Username: #{name}
+            h1 Amount of followers: #{followers}
+            h1 Amount of people following #{name}: #{following}
+            h1 Badges: 
+            ol
+                for badge of badges
+                    li Badge Name: #{badge.badgeName}
+            if privateAccount 
+                h1 This account is private.
+            else
+                h1 This account is a public account.

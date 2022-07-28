@@ -15,6 +15,10 @@
         {
             "name": "Calculator",
             "description": "Calculator API to do many functions of a real-life calculator."
+        },
+        {
+            "name": "Coinmap API",
+            "description": "Helps with parsing and sorting through the coinmap API."
         }
     ],
     "schemes": ["http"],
@@ -173,6 +177,45 @@
                     },
                     "500": {
                         "description": "Internal server error. Check result.error for more details."
+                    }
+                }
+            }
+        },
+        "/coinmap": {
+            "get": {
+                "tags": [
+                    "Coinmap API"
+                ],
+                "parameters": [
+                    {
+                        "name": "fancy",
+                        "in": "query",
+                        "description": "If set to true will return an HTML file with all of the values in it. Otherwise it will return the values in JSON format."
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "description": "The category of venues you want to get. Defaults to 'atm'. Can be 'atm', 'cafe', 'grocery', 'default', 'shopping', 'lodging', or 'nightlife'."
+                    },
+                    {
+                        "name": "max",
+                        "in": "query",
+                        "description": "The max amount of venues you want to get. If NaN or not set, it will return all of the venues."
+                    }
+                ],
+                "summary": "Gets the venues that are ATMs from the Coinmap API.",
+                "responses": {
+                    "200": {
+                        "description": "The server has processed your request and has supplied you with your previous results."
+                    },
+                    "400": {
+                        "description": "The category you have supplied is not a valid category. Check what category you are supplying to the API and try again."
+                    },
+                    "500": {
+                        "description": "Internal server error. Check result.error for more details."
+                    },
+                    "503": {
+                        "description": "API data is still caching. Please wait a moment."
                     }
                 }
             }
