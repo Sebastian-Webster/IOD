@@ -1,0 +1,161 @@
+---
+swagger: "2.0"
+info:
+  description: "Calculates things"
+  version: "1"
+  title: "Seb Calculator"
+host: "localhost:65535"
+basePath: "/"
+tags:
+- name: "Calculator"
+  description: "Calculator API to do many functions of a real-life calculator."
+schemes:
+- "http"
+paths:
+  /calculator/addNumbers:
+    get:
+      tags:
+      - "Calculator"
+      summary: "Adds 2 numbers"
+      operationId: "addNumbers"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "num_1"
+        in: "query"
+        description: "The First Number"
+        required: true
+        type: "string"
+      - name: "num_2"
+        in: "query"
+        description: "The Second number"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "This service allows you to add two numbers together"
+        "400":
+          description: "Either num_1 or num_2 is not a number. Check what inputs you\
+            \ are supplying to the API and try again."
+      x-swagger-router-controller: "Calculator"
+  /calculator/subtractNumbers:
+    get:
+      tags:
+      - "Calculator"
+      summary: "Subtracts 2 numbers"
+      operationId: "subtractNumbers"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "num_1"
+        in: "query"
+        description: "The First Number"
+        required: true
+        type: "string"
+      - name: "num_2"
+        in: "query"
+        description: "The Second number"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "This service allows you to subtract a number by a second number"
+        "400":
+          description: "Either num_1 or num_2 is not a number. Check what inputs you\
+            \ are supplying to the API and try again."
+      x-swagger-router-controller: "Calculator"
+  /calculator/multiplyNumbers:
+    get:
+      tags:
+      - "Calculator"
+      summary: "Multiplies 2 numbers together"
+      operationId: "multiplyNumbers"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "num_1"
+        in: "query"
+        description: "The First Number"
+        required: true
+        type: "string"
+      - name: "num_2"
+        in: "query"
+        description: "The Second number"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "This service allows you to multiply two numbers together"
+        "400":
+          description: "Either num_1 or num_2 is not a number. Check what inputs you\
+            \ are supplying to the API and try again."
+      x-swagger-router-controller: "Calculator"
+  /calculator/divideNumbers:
+    get:
+      tags:
+      - "Calculator"
+      summary: "Divides 2 numbers together"
+      operationId: "divideNumbers"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "num_1"
+        in: "query"
+        description: "The First Number"
+        required: true
+        type: "string"
+      - name: "num_2"
+        in: "query"
+        description: "The Second number"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "This service allows you to divide a number by a second number"
+        "400":
+          description: "Either num_1 or num_2 is not a number or num_1 or num_2 is\
+            \ 0. Check what inputs you are supplying to the API and try again."
+      x-swagger-router-controller: "Calculator"
+  /calculatorV2/exponentializeNumbers:
+    get:
+      tags:
+      - "Calculator"
+      summary: "Raises a number to the power of another number"
+      operationId: "exponentializeNumbers"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "num1"
+        in: "query"
+        description: "The First Number"
+        required: true
+        type: "string"
+      - name: "num2"
+        in: "query"
+        description: "The Second number"
+        required: true
+        type: "string"
+      responses:
+        "200":
+          description: "This service allows you to raise a number to the power of\
+            \ another number"
+        "400":
+          description: "Either num1 or num2 is not a number. Check what inputs you\
+            \ are supplying to the API and try again."
+      x-swagger-router-controller: "Calculator"
+  /calculatorV2/getPreviousResults:
+    get:
+      tags:
+      - "Calculator"
+      summary: "Get the previous results you have received from this calculator service."
+      operationId: "getPreviousResults"
+      produces:
+      - "application/json"
+      parameters: []
+      responses:
+        "200":
+          description: "The server has processed your request and has supplied you\
+            \ with your previous results."
+        "500":
+          description: "Internal server error. Check result.error for more details."
+      x-swagger-router-controller: "Calculator"
