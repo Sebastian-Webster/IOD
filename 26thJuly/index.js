@@ -4,6 +4,7 @@ var calculatorV2Route = require('./routes/calculatorV2Route')
 var pugRoute = require('./routes/pugRoute')
 var coinmapRoute = require('./routes/coinmapRoute')
 var SocialSquareRoute = require('./routes/SocialSquareRoute')
+var swaggerRoute = require('./routes/swaggerRoute')
 
 var cors = require('cors');
 
@@ -31,6 +32,7 @@ servers.forEach((server, index) => {
     server.use('/pug', pugRoute)
     server.use('/coinmap', coinmapRoute)
     server.use('/socialsquare', SocialSquareRoute)
+    server.use('/swagger', swaggerRoute)
 
     server.set('view engine', 'pug')
     

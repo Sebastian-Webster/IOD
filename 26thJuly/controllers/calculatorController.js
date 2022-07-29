@@ -1,5 +1,5 @@
-var calculator = require('../libraries/Calculator')
-var Calculator = new calculator()
+var Calculator = require('../libraries/Calculator')
+var calculator = new Calculator()
 
 const addNumbers = (req, res) => {
     let {num_1, num_2} = req.query;
@@ -17,7 +17,7 @@ const addNumbers = (req, res) => {
     }
 
     try {
-        const result = Calculator.add(num_1, num_2)
+        const result = calculator.add(num_1, num_2)
         res.status(200).json({
             status: "SUCCESS",
             result
@@ -47,7 +47,7 @@ const subtractNumbers = (req, res) => {
     }
 
     try {
-        const result = Calculator.subtract(num_1, num_2)
+        const result = calculator.subtract(num_1, num_2)
         res.status(200).json({
             status: "SUCCESS",
             result
@@ -77,7 +77,7 @@ const multiplyNumbers = (req, res) => {
     }
 
     try {
-        const result = Calculator.multiply(num_1, num_2)
+        const result = calculator.multiply(num_1, num_2)
         res.status(200).json({
             status: "SUCCESS",
             result
@@ -117,7 +117,7 @@ const divideNumbers = (req, res) => {
     }
 
     try {
-        const result = Calculator.divide(num_1, num_2)
+        const result = calculator.divide(num_1, num_2)
         res.status(200).json({
             status: "SUCCESS",
             result
@@ -151,7 +151,7 @@ const exponentializeNumbers = (req, res) => {
     }
 
     try {
-        const result = Calculator.exponentialize(num1, num2)
+        const result = calculator.exponentialize(num1, num2)
         res.status(200).json({
             status: "SUCCESS",
             result
@@ -187,7 +187,7 @@ const modulusNumbers = (req, res) => {
     }
 
     try {
-        const result = Calculator.modulus(num_1, num_2)
+        const result = calculator.modulus(num_1, num_2)
         res.status(200).json({
             status: "SUCCESS",
             result
@@ -203,7 +203,7 @@ const modulusNumbers = (req, res) => {
 
 const previousResults = (req, res) => {
     try {
-        res.status(200).json(Calculator.getPreviousResults())
+        res.status(200).json(calculator.getPreviousResults())
     } catch (e) {
         console.error(e)
         res.status(500).json({
@@ -214,7 +214,7 @@ const previousResults = (req, res) => {
 }
 
 const returnPreviousResults = () => {
-    return Calculator.getPreviousResults();
+    return calculator.getPreviousResults();
 }
 
 module.exports = {

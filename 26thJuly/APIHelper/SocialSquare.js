@@ -5,10 +5,10 @@ const getUserWithName = (name) => {
         axios.get(`http://it-solutions.homedns.org:9443/publicApis/userAPI/${name}`)
         .then(response => response.data)
         .then(response => {
-            axios.get(`http://it-solutions.homedns.org:9443/getImageOnServer/${response.data.profileImageKey}`).then(response => response.data)
+            axios.get(`http://it-solutions.homedns.org:9443/getImageOnServer/${response.data.profileImageKey}`).then(response => response.data.data)
             .then(result => {
                 const data = {
-                    ...response.data,
+                    ...response,
                     profileImageURL: 'data:image/jpeg;base64,' + result
                 }
 
