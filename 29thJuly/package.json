@@ -1,0 +1,23 @@
+{
+  "name": "29thjuly",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js -e js,pug,json,mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "helmet": "^5.1.1",
+    "method-override": "^3.0.0",
+    "mongodb": "^4.8.1",
+    "mongodb-memory-server": "^8.8.0",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.19",
+    "pug": "^3.0.2"
+  }
+}

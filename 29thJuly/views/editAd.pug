@@ -1,0 +1,37 @@
+html 
+    head 
+        title Edit Ad 
+        link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC", crossorigin="anonymous")
+    body 
+        if typeof ad === 'string'
+            div(class='container-fluid d-flex justify-content-center align-items-center flex-column')
+                h1 An error occured:
+                p(style='color: red;')=ad
+        else
+            div(class='container-fluid d-flex justify-content-center align-items-center flex-column')
+                h1 Editing Ad with ID: #{ad._id}
+                form(action="http://localhost/", method="post", onsubmit='this.action = this.action + this.id.value + "?_method=put"')
+                    input(type='hidden', name='id', value=ad._id)
+                    div(class='card justify-content-center align-items-center mx-2', style='border-radius: 20px;width: 400px')
+                        if ad.adImageURL
+                            img(src=ad.adImageURL, class='card-img-top')
+                        div(class='card-body')
+                            div(class='card-title')
+                                label(for='title') Title:
+                                br
+                                input(type="text", name="title", placeholder="New Ad Title", value=ad.title)
+                            div(class='card-text')
+                                label(style='vertical-align: middle;') Description:
+                                br
+                                textarea(name="description", placeholder="New Ad Description", style='vertical-align: middle;')= ad.description
+                            div(class='card-text')
+                                label(for='seller') Seller:
+                                br
+                                input(type="text", name="seller", placeholder="New Ad Seller", value=ad.seller)
+                            div(class='card-text')
+                                label(for='adImageURL') Ad Image URL:
+                                br
+                                input(type="text", name="adImageURL", placeholder="New Ad Image URL", value=ad.adImageURL)
+                            p(class='card-text text-center') ID: #{ad._id}
+                            div(class='d-flex justify-content-center')
+                                button(type='submit', class='btn btn-info mx-1') Update Ad

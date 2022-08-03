@@ -1,0 +1,76 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 1s linear;
+  }
+
+  .rainbowColor {
+    animation: rainbowColor 10s infinite linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rainbowColor {
+  0% {
+    color: black;
+    background-color: red;
+  }
+  16.67% {
+    background-color: orange;
+  }
+  33.34% {
+    background-color: yellow;
+  }
+  50% {
+    color: black;
+    background-color: green;
+  }
+  66.67% {
+    color: white;
+    background-color: blue;
+  }
+  83.34% {
+    color: white;
+    background-color: indigo;
+  }
+  100% {
+    color: black;
+    background-color: red;
+  }
+}

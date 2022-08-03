@@ -1,0 +1,29 @@
+.calculatorBody {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculatorRow {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+}
+
+.calculatorButton {
+    width: 18vw;
+    height: min(calc(18vw / 2), 8vh);
+    font-size: min(calc(14vw / 3), 8vh);
+    border: 1px solid transparent;
+    border-radius: 20px;
+    margin-top: 2vh;
+    margin-right: 2vw;
+    cursor: pointer;
+}
+
+#resultString {
+    font-size: calc(16vw / 2);
+}
