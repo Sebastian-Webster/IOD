@@ -288,7 +288,9 @@ function App() {
       <h1>Rendering Emojis - Function Component</h1>
       <RenderEmojiFunction/>
       <h1>Calculator Function</h1>
-      <Calculator/>
+      <Calculator scientific={false}/>
+      <h1>Scientific Calculator Function</h1>
+      <Calculator scientific={true}/>
     </div>
   );
 }
