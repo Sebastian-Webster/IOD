@@ -1,7 +1,10 @@
-import React, {Component, useState} from 'react'
+import React, {Component, PureComponent, useState} from 'react'
 import './App.css';
 import {RenderEmojiClass, RenderEmojiFunction} from './components/RenderEmoji'
 import {Calculator} from './components/Calculator'
+import MemoComponent from './components/MemoComponent';
+import ClickCounter from './components/ClickCounter'
+import HoverCounter from './components/HoverCounter'
 
 function App() {
   const [showWarning, setShowWarning] = useState(true);
@@ -253,6 +256,92 @@ function App() {
     {id: 1, title: 'Hello World', content: 'Welcome to learning React'},
     {id: 2, title: 'Installation', content: 'You can install React from npm.'}
   ]
+  
+  class Fragments extends Component {
+    render() {
+      return (
+        <>
+          <h1>This is a Fragment demo.</h1>
+          <FragmentsDemo/>
+        </>
+      );
+    }
+  }
+  
+  function FragmentsDemo() {
+    return (
+      <>
+        <h1>I am inside of a fragment</h1>
+        <p>I am inside of a fragment too</p>
+      </>
+    )
+  }
+  
+  class PureDemoParent extends PureComponent {
+    constructor(props) {
+      super(props)
+
+      this.state = {
+        name: "Sebastian"
+      }
+    }
+
+    componentDidMount() {
+      var interval = setInterval(() => {
+        this.setState({name: 'Sebastian'})
+      }, 1000);
+      setTimeout(() => {
+        clearInterval(interval)
+        setInterval(() => {
+          this.setState({name: this.state.name === 'Sebastian' ? 'Bharath' : 'Sebastian'})
+        }, 2000);
+      }, 5000);
+    }
+
+    render() {
+      return (
+        <div>
+          <h3>Pure and Regular Component parent - Check console</h3>
+          <RegularComponentDemo name={this.state.name}/>
+          <PureComponentDemo name={this.state.name}/>
+        </div>
+      )
+    }
+  }
+
+  class RegularComponentDemo extends Component {
+    render() {
+      console.log('REGULAR COMPONENT IS RENDERING')
+      return(
+        <>
+          <h1>Regular Component</h1>
+          <h1>{this.props.name}</h1>
+        </>
+      )
+    }
+  }
+
+  class PureComponentDemo extends PureComponent {
+    render() {
+      console.log('PURE COMPONENT IS RENDERING')
+      return(
+        <>
+          <h1>Pure Component</h1>
+          <h1>{this.props.name}</h1>
+        </>
+      )
+    }
+  }
+
+  class PureComponentWithArrays extends PureComponent {
+    constructor(props) {
+      super(props)
+      this.state = {
+        data: []
+      }
+    }
+  }
+  
 
   return (
     <div className="App">
@@ -291,6 +380,16 @@ function App() {
       <Calculator scientific={false}/>
       <h1>Scientific Calculator Function</h1>
       <Calculator scientific={true}/>
+      <h1>React Fragments</h1>
+      <Fragments/>
+      <h1>PureComponent</h1>
+      <PureDemoParent/>
+      <h1>Memo Component</h1>
+      <MemoComponent/>
+      <h1>Click Counter</h1>
+      <ClickCounter name="Sebastian"/>
+      <h1>Hover Counter</h1>
+      <HoverCounter name="Sebastian"/>
     </div>
   );
 }
