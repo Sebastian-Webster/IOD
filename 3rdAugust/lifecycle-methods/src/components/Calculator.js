@@ -31,8 +31,59 @@ function Calculator({scientific}) {
                 <CalculatorButton text={'='} setResultString={setResultString} type="equals" scientific={scientific}/>
                 <CalculatorButton text={'Clear'} setResultString={setResultString} type="clear" scientific={scientific}/>
             </div>
+            <div className="calculatorRow">
+                <CalculatorButton text={'**'} setResultString={setResultString} type="operation" scientific={scientific}/>
+                {scientific && (
+                    <>
+                        <CalculatorButton text={'('} setResultString={setResultString} type="operation" scientific={scientific}/>
+                        <CalculatorButton text={')'} setResultString={setResultString} type="operation" scientific={scientific}/>
+                    </>
+                )}
+                <CalculatorButton text={'Back'} setResultString={setResultString} type="back" scientific={scientific}/>
+            </div>
         </div>
     )
+}
+
+function doAllCalculations(resultStringArray) {
+    while(resultStringArray.length !== 1) {
+        if (resultStringArray[1] === '+') {
+            resultStringArray[0] = +resultStringArray[0] + +resultStringArray[2]
+        } else if (resultStringArray[1] === '-') {
+            resultStringArray[0] = +resultStringArray[0] - +resultStringArray[2]
+        } else if (resultStringArray[1] === 'X') {
+            resultStringArray[0] = +resultStringArray[0] * +resultStringArray[2]
+        } else if (resultStringArray[1] === '/') {
+            resultStringArray[0] = +resultStringArray[0] / +resultStringArray[2]
+        } else if (resultStringArray[1] === '**') {
+            resultStringArray[0] = (+resultStringArray[0]) ** (+resultStringArray[2])
+        }
+        resultStringArray.splice(1, 2)
+    }
+    return parseFloat(resultStringArray[0])
+}
+
+function sortExponentMultiDivSubAddOperations(resultStringArray) {
+    while (resultStringArray.findIndex(item => item === '**') !== -1) {
+        resultStringArray.forEach((result, index) => {
+            if (result === '**') {
+                resultStringArray[index - 1] = String((+resultStringArray[index - 1]) ** (+resultStringArray[index + 1]))
+                resultStringArray.splice(index, 2)
+            }
+        })
+    }
+    while (resultStringArray.findIndex(item => item === 'X' || item === '/') !== -1) {
+        resultStringArray.forEach((result, index) => {
+            if (result === 'X') {
+                resultStringArray[index - 1] = String(+resultStringArray[index - 1] * +resultStringArray[index + 1])
+                resultStringArray.splice(index, 2)
+            } else if (result === '/') {
+                resultStringArray[index - 1] = String(+resultStringArray[index - 1] / +resultStringArray[index + 1])
+                resultStringArray.splice(index, 2)
+            }
+        })
+    }
+    return resultStringArray
 }
 
 const CalculatorButton = ({text, setResultString, type, scientific}) => {
@@ -47,7 +98,7 @@ const CalculatorButton = ({text, setResultString, type, scientific}) => {
             setResultString(resultString => {
                 let newResultString = resultString;
                 newResultString = String(newResultString)
-                if (newResultString === '0') return text
+                if (newResultString === '0' || newResultString === 'ERROR') return text
                 newResultString += text
                 return String(newResultString)
             })
@@ -57,42 +108,49 @@ const CalculatorButton = ({text, setResultString, type, scientific}) => {
                 let resultStringArray = newResultString.toString().split(' ')
                 if (resultStringArray.length < 3) {
                     console.log('Returning because resultStringArray.length is less than 3')
-                    return newResultString
+                    return 'ERROR'
                 }
                 if (resultStringArray.length % 2 !== 1) {
                     console.log('Returning because resultStringArray.length % 2 !== 1')
-                    return newResultString
+                    return 'ERROR'
                 }
                 if (scientific) {
                     console.log(resultStringArray)
-                    while (resultStringArray.findIndex(item => item === 'X' || item === '/') !== -1) {
-                        resultStringArray.forEach((result, index) => {
-                            if (result === 'X') {
-                                resultStringArray[index - 1] = String(+resultStringArray[index - 1] * +resultStringArray[index + 1])
-                                resultStringArray.splice(index, 2)
-                            } else if (result === '/') {
-                                resultStringArray[index - 1] = String(+resultStringArray[index - 1] / +resultStringArray[index + 1])
-                                resultStringArray.splice(index, 2)
-                            }
-                        })
+                    let startBracketIndex = resultStringArray.findIndex(item => item === '(')
+                    while (startBracketIndex !== -1) {
+                        let endBracketIndex = resultStringArray.findIndex(item => item === ')')
+                        if (endBracketIndex === -1) {
+                            console.log('Returning because no end bracket is present.')
+                            return 'ERROR'
+                        }
+                        resultStringArray.splice(startBracketIndex, 1) //get rid of starting bracket
+                        resultStringArray.splice(endBracketIndex, 1) //get rid of ending bracket
+                        let bracketIndicesDifference = endBracketIndex - startBracketIndex
+                        let calculationsArray = resultStringArray.splice(startBracketIndex, bracketIndicesDifference)
+                        console.log(calculationsArray.toString())
+                        resultStringArray[startBracketIndex - 1] = doAllCalculations(sortExponentMultiDivSubAddOperations(calculationsArray))
+                        startBracketIndex = resultStringArray.findIndex(item => item === '(')
                     }
+
+                    resultStringArray = sortExponentMultiDivSubAddOperations(resultStringArray)
                 }
-                while(resultStringArray.length !== 1) {
-                    if (resultStringArray[1] === '+') {
-                        resultStringArray[0] = +resultStringArray[0] + +resultStringArray[2]
-                    } else if (resultStringArray[1] === '-') {
-                        resultStringArray[0] = +resultStringArray[0] - +resultStringArray[2]
-                    } else if (resultStringArray[1] === 'X') {
-                        resultStringArray[0] = +resultStringArray[0] * +resultStringArray[2]
-                    } else if (resultStringArray[1] === '/') {
-                        resultStringArray[0] = +resultStringArray[0] / +resultStringArray[2]
-                    }
-                    resultStringArray.splice(1, 2)
-                }
-                return parseFloat(resultStringArray[0])
+                return doAllCalculations(resultStringArray)
             })
         } else if (type === 'clear') {
             setResultString('0')
+        } else if (type == 'back') {
+            setResultString(resultString => {
+                resultString = String(resultString)
+                if (resultString.charAt(resultString.length - 1) == ' ') {
+                    return resultString.slice(0, resultString.length - 3)
+                } else if (resultString == '0') {
+                    return resultString
+                } else if (resultString.length == 1) {
+                    return '0'
+                } else {
+                    return resultString.slice(0, resultString.length - 1)
+                }
+            })
         }
     }
 

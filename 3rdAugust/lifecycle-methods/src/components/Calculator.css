@@ -16,7 +16,7 @@
 .calculatorButton {
     width: 18vw;
     height: min(calc(18vw / 2), 8vh);
-    font-size: min(calc(14vw / 3), 8vh);
+    font-size: 250%;
     border: 1px solid transparent;
     border-radius: 20px;
     margin-top: 2vh;

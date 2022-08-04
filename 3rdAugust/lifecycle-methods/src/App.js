@@ -379,6 +379,7 @@ function App() {
       <h1>Calculator Function</h1>
       <Calculator scientific={false}/>
       <h1>Scientific Calculator Function</h1>
+      <h1>Doesn't support nesting brackets yet :)</h1>
       <Calculator scientific={true}/>
       <h1>React Fragments</h1>
       <Fragments/>
