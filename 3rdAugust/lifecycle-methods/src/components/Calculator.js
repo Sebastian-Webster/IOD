@@ -1,6 +1,11 @@
 import React, {useState} from 'react';
 import './Calculator.css'
 
+//TODO:
+//Fix bug where in rare cases pressing the back button leaves an extra space
+//Add error control so you cannot do 2 operations in a row
+//Add bracket nesting
+
 function Calculator({scientific}) {
     const [resultString, setResultString] = useState('0')
 
