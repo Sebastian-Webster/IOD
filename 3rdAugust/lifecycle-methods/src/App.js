@@ -1,13 +1,22 @@
 import React, {Component, PureComponent, useState} from 'react'
+import ReactDOM from 'react-dom';
 import './App.css';
 import {RenderEmojiClass, RenderEmojiFunction} from './components/RenderEmoji'
 import {Calculator} from './components/Calculator'
 import MemoComponent from './components/MemoComponent';
 import ClickCounter from './components/ClickCounter'
 import HoverCounter from './components/HoverCounter'
+import {UserProvider} from './components/context/NameContext'
+import ContextDemoA from './components/ContextDemoA';
+import { NameContextTwo } from './components/context/NameContext2';
+import PostList from './components/PostList';
+import PostForm from './components/PostForm';
 
 function App() {
+  var verbose = false;
   const [showWarning, setShowWarning] = useState(true);
+  const [showModal, setShowModal] = useState(false)
+  const [name, setName] = useState('Sebastian')
   class MountingExample extends Component {
     constructor(props) {
       super(props) //Call the constructor method for React.Component
@@ -136,7 +145,7 @@ function App() {
 
   class UnmountingExampleChild extends Component {
     componentWillUnmount() {
-      alert("The component is getting unmounted")
+      verbose && console.log("The component is getting unmounted")
     }
 
     render() {
@@ -311,7 +320,7 @@ function App() {
 
   class RegularComponentDemo extends Component {
     render() {
-      console.log('REGULAR COMPONENT IS RENDERING')
+      verbose && console.log('REGULAR COMPONENT IS RENDERING')
       return(
         <>
           <h1>Regular Component</h1>
@@ -323,7 +332,7 @@ function App() {
 
   class PureComponentDemo extends PureComponent {
     render() {
-      console.log('PURE COMPONENT IS RENDERING')
+      verbose && console.log('PURE COMPONENT IS RENDERING')
       return(
         <>
           <h1>Pure Component</h1>
@@ -341,8 +350,58 @@ function App() {
       }
     }
   }
-  
 
+  class Modal extends Component {
+    render() {
+      return ReactDOM.createPortal(
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            display: 'grid',
+            justifyContent: 'center',
+            alignItems: 'center',
+            backgroundColor: 'rgba(0, 0, 0, 0.3)',
+            height: '100%'
+          }}
+          onClick={this.props.onClose}
+        >
+          <div
+            style={{
+              padding: 20,
+              background: '#fff',
+              borderRadius: 2,
+              display: 'inline-block',
+              minHeight: 300,
+              margin: '1rem',
+              position: 'relative',
+              minWidth: 300,
+              boxShadow: '0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)',
+              justifySelf: 'center'
+            }}
+          >
+            {this.props.children}
+            <hr/>
+            <button onClick={this.props.onClose}>Close</button>
+          </div>
+        </div>,
+        document.getElementById('portal-root')
+      )
+    }
+  }
+
+  function handleShowModalClick() {
+    setShowModal(true)
+  }
+
+  function handleCloseModal() {
+    setShowModal(false)
+  }
+  
+  
   return (
     <div className="App">
       <h1>React Lifecycle Methods Examples</h1>
@@ -391,6 +450,25 @@ function App() {
       <ClickCounter name="Sebastian"/>
       <h1>Hover Counter</h1>
       <HoverCounter name="Sebastian"/>
+      <h1>Pure Component with Arrays</h1>
+      <h2>...</h2>
+      <h1>Modal - ReactDOM.createPortal</h1>
+      <button onClick={handleShowModalClick}>Show Secret Modal</button>
+      {showModal ? (
+        <Modal onClose={handleCloseModal}>
+          This is the secret modal message!
+        </Modal>
+      ) : null}
+      <h1>React Context Demo</h1>
+      <NameContextTwo.Provider value={{name, setName}}>
+        {/*<UserProvider value="Sebastian"> DO NOT PROVIDE PROVIDER IF YOU WANT TO USE DEFAULT VALUE*/}
+          <ContextDemoA/>
+        {/*</UserProvider>*/}
+      </NameContextTwo.Provider>
+      <h1>Post List - Fetching Data in React</h1>
+      <PostList/>
+      <h1>Post Form - POST data in React</h1>
+      <PostForm/>
     </div>
   );
 }

@@ -16,7 +16,7 @@
 .calculatorButton {
     width: 18vw;
     height: min(calc(18vw / 2), 8vh);
-    font-size: 250%;
+    font-size: 3vh;
     border: 1px solid transparent;
     border-radius: 20px;
     margin-top: 2vh;
@@ -26,4 +26,37 @@
 
 #resultString {
     font-size: calc(16vw / 2);
+}
+
+.historyButton {
+    font-size: 200%;
+    border: 5px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+#clearHistoryButton {
+    font-size: 200%;
+    border: 5px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    background-color: red;
+    color: white;
+}
+
+#goBackButton {
+    border: 1px solid black;
+    border-radius: 20px;
+    background-color: green;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+button:active {
+    transform: scale(0.95);
 }
