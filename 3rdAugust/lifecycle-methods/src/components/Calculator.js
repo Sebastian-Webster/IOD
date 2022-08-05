@@ -7,7 +7,7 @@ import './Calculator.css'
 //TODO:
 //FINISHED -- Fix bug where in rare cases pressing the back button leaves an extra space; like when pressing ** ( )
 //FINISHED -- Add error control so you cannot do 2 operations in a row
-//Add bracket nesting
+//Add bracket nesting - I'm going to have to research how to do this
 //FINISHED -- Add calculation history so you can go back in time and get a previous answer
 //FINISHED -- Add ability to add decimal points
 //FINISHED -- Prevent JS from having a weird effect on floating point numbers by getting the decimal points of the numbers and use .toFixed() to have the answer have the same amount of decimal points as the number in the equation with the most amount of decimal points; like with .1 + .2
@@ -172,6 +172,10 @@ function getDecimalCount(num) {
         return numString.split('.')[1].length
     }
     return 0;
+}
+
+function RECURSIVE_findBrackets(array) {
+
 }
 
 const CalculatorButton = ({text, setResultString, type, scientific, setHistory, setShowHistory, history}) => {
