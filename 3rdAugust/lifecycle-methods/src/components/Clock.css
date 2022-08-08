@@ -123,3 +123,12 @@
     top: calc(var(--clock-width) * 0.04);
     left: calc(var(--clock-width) * 0.7);
 }
+
+#middleCircle {
+    min-width: calc(var(--clock-width) / 48);
+    min-height: calc(var(--clock-width) / 48);
+    position: absolute;
+    background-color: black;
+    border-radius: 50%;
+    right: calc(var(--clock-width) / 2.06);
+}

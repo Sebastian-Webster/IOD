@@ -33,17 +33,17 @@ const ClockText = ({time}) => {
 }
 
 const CircleClock = ({time}) => {
-    const hours = time.getHours()
-    const hourHandRotateAmount = ((hours > 12 ? hours - 12 : hours) * 30) - 90
-    const hourHandStyle = {transform: `rotateZ(${hourHandRotateAmount}deg)`}
-
-    const minutes = time.getMinutes()
-    const minuteHandRotateAmount = (minutes * 6) - 90
-    const minuteHandStyle = {transform: `rotateZ(${minuteHandRotateAmount}deg)`}
-
     const seconds = time.getSeconds()
     const secondsHandRotateAmount = (seconds * 6) - 90
     const secondsHandStyle = {transform: `rotateZ(${secondsHandRotateAmount}deg)`}
+
+    const minutes = time.getMinutes()
+    const minuteHandRotateAmount = ((minutes * 6) + (seconds / 12)) - 90
+    const minuteHandStyle = {transform: `rotateZ(${minuteHandRotateAmount}deg)`}
+    
+    const hours = time.getHours()
+    const hourHandRotateAmount = (((hours > 12 ? hours - 12 : hours) * 30) + ((minutes / 12) * 6)) - 90
+    const hourHandStyle = {transform: `rotateZ(${hourHandRotateAmount}deg)`}
 
     return (
         <div className='d-flex justify-content-center align-items-center mb-5'>
@@ -79,6 +79,8 @@ const CircleClock = ({time}) => {
                     <div id='shownHourHand'/>
                     <div id='hiddenHourHandTwo'/>
                 </div>
+
+                <div id='middleCircle'/>
                 
             </div>
         </div>
