@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import ReactDOM from 'react-dom'
+import React, {Component, useState} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faClockRotateLeft, faTrash } from '@fortawesome/free-solid-svg-icons'
 import './Calculator.css'
@@ -16,6 +15,15 @@ import './Calculator.css'
 //FINISHED -- Fix numbers like 10 x 5.6 having .0 at the end because of fix to JS weird effect on floating point numbers
 //FINISHED -- Fix history number being appended onto 0 if 0 is the result string
 //FINISHED -- Fix history being cleared for no apparent reason
+//FINISHED -- Add a class version of the calculator
+//FINISHED -- Fix deleting the last history item wouldn't hide the history list
+
+//Recursive function
+//Use filter to get the amount of brackets; if the starting bracket amount and end bracket amount is not the same then return error
+//Somehow find the index of the first starting bracket and then find the first end bracket after that index
+//Then calculate the values within those two indices and slot the answer into the first start bracket index and delete the other values
+//Do that until there are no more brackets
+//Return answer
 
 const operations = ['+', '-', 'X', '/', '**']
 const bracketOperations = ['(', ')']
@@ -123,6 +131,152 @@ function Calculator({scientific}) {
             }
         </div>
     )
+}
+
+class CalculatorClass extends Component {
+    constructor({scientific}) {
+        super({scientific})
+        this.scientific = scientific
+
+        this.state = {
+            resultString: '0',
+            history: [],
+            showHistory: false
+        }
+    }
+
+    handleOnHistoryButtonClick = (item) => {
+        let currentResultString = this.resultString;
+        //If the result string is 0 (cleared) or 'ERROR' (an error occured) then replace it with the history answer
+        currentResultString = currentResultString === '0' || currentResultString === 'ERROR' ? '' : currentResultString
+        currentResultString += item.split(' = ')[1]
+        this.setState({
+            resultString: currentResultString,
+            showHistory: false
+        })
+    }
+
+    handleOnHistoryButtonRightClick = (e, item) => {
+        e.preventDefault() //Prevent context menu from showing
+        let currentResultString = this.state.resultString;
+         //If the result string is 0 (cleared) or 'ERROR' (an error occured) then replace it with the history answer
+         currentResultString = currentResultString === '0' || currentResultString === 'ERROR' ? '' : currentResultString
+        currentResultString += item.split(' = ')[0]
+        this.setState({
+            resultString: currentResultString,
+            showHistory: false
+        })
+    }
+
+    clearHistory = () => {
+        this.setState({
+            history: [],
+            showHistory: false
+        })
+    }
+
+    deleteHistoryItem = (index) => {
+        let newHistory = this.state.history.slice()
+        newHistory.splice(index, 1)
+        this.setState({
+            history: newHistory,
+            showHistory: newHistory.length > 0
+        })
+    }
+
+    setResultString = (arg) => {
+        if (typeof arg === 'function') {
+            this.setState(prevState => ({
+                resultString: arg.call(null, prevState.resultString)
+            }))
+        } else {
+            this.setState({
+                resultString: arg
+            })
+        }
+    }
+
+    setShowHistory = (showHistory) => {
+        this.setState({
+            showHistory
+        })
+    }
+
+    setHistory = (history) => {
+        this.setState({
+            history
+        })
+    }
+
+    render() {
+        return (
+            <div className="calculatorBody">
+                {this.state.showHistory ?
+                    <>
+                        <h1>Left Click to insert answer into calculator</h1>
+                        <h1>Right Click to insert calculation into calculator</h1>
+                        <button onClick={this.clearHistory} id="clearHistoryButton">Clear History</button>
+                        {
+                            this.state.history.map((item, index) => (
+                                <div key={String(index)}>
+                                    <button style={{marginLeft: 65}} className="historyButton" onClick={() => {this.handleOnHistoryButtonClick(item)}} onContextMenu={(e) => {this.handleOnHistoryButtonRightClick(e, item)}}>
+                                        {item}
+                                    </button>
+                                    <FontAwesomeIcon icon={faTrash} style={{marginLeft: 30, color: 'red', fontSize: 40, cursor: 'pointer'}} onClick={() => {this.deleteHistoryItem(index)}}/>
+                                </div>
+                            ))
+                        }
+                          
+                        <button id='goBackButton' onClick={() => {this.setState({showHistory: false})}}>Go Back</button>
+                    </>
+                :
+                    <>
+                        <h1 id="resultString">{this.state.resultString}</h1>
+                        <div className="calculatorRow">
+                            <CalculatorButton text={1} setResultString={this.setResultString} type="number" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            <CalculatorButton text={2} setResultString={this.setResultString} type="number" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            <CalculatorButton text={3} setResultString={this.setResultString} type="number" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            <CalculatorButton text={'+'} setResultString={this.setResultString} type="operation" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                        </div>
+                        <div className="calculatorRow">
+                            <CalculatorButton text={4} setResultString={this.setResultString} type="number" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            <CalculatorButton text={5} setResultString={this.setResultString} type="number" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            <CalculatorButton text={6} setResultString={this.setResultString} type="number" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            <CalculatorButton text={'-'} setResultString={this.setResultString} type="operation" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                        </div>
+                        <div className="calculatorRow">
+                            <CalculatorButton text={7} setResultString={this.setResultString} type="number" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            <CalculatorButton text={8} setResultString={this.setResultString} type="number" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            <CalculatorButton text={9} setResultString={this.setResultString} type="number" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            <CalculatorButton text={'X'} setResultString={this.setResultString} type="operation" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                        </div>
+                        <div className="calculatorRow">
+                            <CalculatorButton text={0} setResultString={this.setResultString} type="number" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            <CalculatorButton text={'/'} setResultString={this.setResultString} type="operation" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            <CalculatorButton text={'='} setResultString={this.setResultString} type="equals" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            <CalculatorButton text={'Clear'} setResultString={this.setResultString} type="clear" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                        </div>
+                        <div className="calculatorRow">
+                            <CalculatorButton text={'**'} setResultString={this.setResultString} type="operation" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            {this.scientific ? (
+                                <>
+                                    <CalculatorButton text={'('} setResultString={this.setResultString} type="operation" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                                    <CalculatorButton text={')'} setResultString={this.setResultString} type="operation" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                                </>
+                            ) : 
+                                <CalculatorButton text={'.'} setResultString={this.setResultString} type="number" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                            }
+                            <CalculatorButton text={'Back'} setResultString={this.setResultString} type="back" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                        </div>
+                        <div className="calculatorRow">
+                            {this.scientific && <CalculatorButton text={'.'} setResultString={this.setResultString} type="number" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>}
+                            <CalculatorButton setResultString={this.setResultString} type="history" scientific={this.scientific} setHistory={this.setHistory} setShowHistory={this.setShowHistory} history={this.state.history}/>
+                        </div>
+                    </>
+                }
+            </div>
+        )
+    }
 }
 
 function doAllCalculations(resultStringArray) {
@@ -248,7 +402,7 @@ const CalculatorButton = ({text, setResultString, type, scientific, setHistory, 
                     let answer = parseFloat(result).toFixed(maxAccuracy)
                     if (answer.includes('.')) {
                         const answerWithOnlyDecimalPoints = parseFloat('0.' + answer.split('.')[1])
-                        if (answerWithOnlyDecimalPoints == 0) {
+                        if (answerWithOnlyDecimalPoints === 0) {
                             answer = parseFloat(answer).toFixed(0)
                         }
                     }
@@ -261,23 +415,23 @@ const CalculatorButton = ({text, setResultString, type, scientific, setHistory, 
             })
         } else if (type === 'clear') {
             setResultString('0')
-        } else if (type == 'back') {
+        } else if (type === 'back') {
             setResultString(resultString => {
                 resultString = String(resultString)
-                if (resultString.charAt(resultString.length - 2) == '*' && resultString.charAt(resultString.length - 3)) {
+                if (resultString.charAt(resultString.length - 2) === '*' && resultString.charAt(resultString.length - 3)) {
                     //If exponentation
                     return resultString.slice(0, resultString.length - 4)
-                } else if (resultString.charAt(resultString.length - 1) == ' ') {
+                } else if (resultString.charAt(resultString.length - 1) === ' ') {
                     return resultString.slice(0, resultString.length - 3)
-                } else if (resultString == '0') {
+                } else if (resultString === '0') {
                     return resultString
-                } else if (resultString.length == 1) {
+                } else if (resultString.length === 1) {
                     return '0'
                 } else {
                     return resultString.slice(0, resultString.length - 1)
                 }
             })
-        } else if (type == 'history') {
+        } else if (type === 'history') {
             setShowHistory(true)
         }
     }
@@ -294,4 +448,4 @@ const CalculatorButton = ({text, setResultString, type, scientific, setHistory, 
     )
 }
 
-export {Calculator}
+export {Calculator, CalculatorClass}

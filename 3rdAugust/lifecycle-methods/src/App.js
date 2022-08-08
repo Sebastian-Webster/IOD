@@ -2,7 +2,7 @@ import React, {Component, PureComponent, useState} from 'react'
 import ReactDOM from 'react-dom';
 import './App.css';
 import {RenderEmojiClass, RenderEmojiFunction} from './components/RenderEmoji'
-import {Calculator} from './components/Calculator'
+import {Calculator, CalculatorClass} from './components/Calculator'
 import MemoComponent from './components/MemoComponent';
 import ClickCounter from './components/ClickCounter'
 import HoverCounter from './components/HoverCounter'
@@ -11,6 +11,14 @@ import ContextDemoA from './components/ContextDemoA';
 import { NameContextTwo } from './components/context/NameContext2';
 import PostList from './components/PostList';
 import PostForm from './components/PostForm';
+import HookCounter from './components/HookCounter';
+import ReactHookWithObjs from './components/ReactHookWithObjs';
+import ReactHookWithArrays from './components/ReactHookWithArrays';
+import UseEffectHook from './components/UseEffectHook';
+import MouseContainer from './components/MouseContainer';
+import DataFetch from './components/DataFetch';
+import DataFetchTwo from './components/DataFetchTwo';
+import Clock from './components/Clock';
 
 function App() {
   var verbose = false;
@@ -435,11 +443,16 @@ function App() {
       <RenderEmojiClass/>
       <h1>Rendering Emojis - Function Component</h1>
       <RenderEmojiFunction/>
-      <h1>Calculator Function</h1>
+      <h1>Calculator - Function Component</h1>
       <Calculator scientific={false}/>
-      <h1>Scientific Calculator Function</h1>
+      <h1>Scientific Calculator - Function Component</h1>
       <h1>Doesn't support nesting brackets yet :)</h1>
       <Calculator scientific={true}/>
+      <h1>Calculator - Class Component</h1>
+      <CalculatorClass scientific={false}/>
+      <h1>Scientific Calculator - Class Component</h1>
+      <h2>Doesn't support nesting brackets yet :)</h2>
+      <CalculatorClass scientific={true}/>
       <h1>React Fragments</h1>
       <Fragments/>
       <h1>PureComponent</h1>
@@ -469,6 +482,22 @@ function App() {
       <PostList/>
       <h1>Post Form - POST data in React</h1>
       <PostForm/>
+      <h1>React Hooks - useState - Counter</h1>
+      <HookCounter initialCount={0}/>
+      <h1>React Hooks - useState with Objects - Name form</h1>
+      <ReactHookWithObjs/>
+      <h1>React Hooks - useState with Arrays</h1>
+      <ReactHookWithArrays/>
+      <h1>React Hooks - useEffect</h1>
+      <UseEffectHook/>
+      <h1>React Hooks - useEffect - Event Listeners and ComponentWillUnmount like funtionality</h1>
+      <MouseContainer/>
+      <h1>Data Fetch with useEffect</h1>
+      <DataFetch/>
+      <h1>Data Fetch</h1>
+      <DataFetchTwo/>
+      <h1>Clock - useState</h1>
+      <Clock/>
     </div>
   );
 }
