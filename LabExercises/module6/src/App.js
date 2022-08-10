@@ -21,8 +21,10 @@ function App() {
       <h1>Regular Calculator - Class Component</h1>
       <CalculatorClass/>
       <h1>Scientific Calculator - Function Component</h1>
+      <h3>Supports nesting brackets :)</h3>
       <Calculator scientific={true}/>
       <h1>Scientific Calculator - Class Component</h1>
+      <h3>Supports nesting brackets :)</h3>
       <CalculatorClass scientific={true}/>
       <h1>--- End of exercise 4 ---</h1>
     </div>
