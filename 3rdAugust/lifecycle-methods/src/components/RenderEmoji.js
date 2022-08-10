@@ -1,38 +1,39 @@
-import React, {Component, useState} from 'react';
+import React, {Component, useContext, useState} from 'react';
+import { CurrentEmojiContext, EmojiListContext } from './context/EmojiContext';
 
 class RenderEmojiClass extends Component {
     constructor(props) {
       super(props)
-      this.state = {
-        emojiList: ['😍', '😛', '💗', '😮', '🙃'],
-        currentEmoji: 0
-      }
     }
 
     render() {
       return (
-        <div>
-          <h1>{this.state.emojiList[this.state.currentEmoji]}</h1>
-          <button
-            onClick={() => {
-              if (this.state.currentEmoji + 1 > this.state.emojiList.length - 1) this.setState({currentEmoji: 0})
-              else this.setState(oldState => {
-                let oldCurrentEmoji = oldState.currentEmoji
-                oldCurrentEmoji += 1
-                return {currentEmoji: oldCurrentEmoji}
-              })
-            }}
-          >
-            Go to the next emoji
-          </button>
-        </div>
+        <EmojiListContext.Consumer>
+          {emojiList => (
+            <CurrentEmojiContext.Consumer>
+              {({currentEmoji, setCurrentEmoji}) => (
+                <div>
+                  <h1>{emojiList[currentEmoji]}</h1>
+                  <button
+                    onClick={() => {
+                      if (currentEmoji + 1 > emojiList.length - 1) setCurrentEmoji(0)
+                      else setCurrentEmoji(currentEmoji + 1)
+                    }}
+                  >
+                    Go to the next emoji
+                  </button>
+                </div>
+              )}
+            </CurrentEmojiContext.Consumer>
+          )}
+        </EmojiListContext.Consumer>
       )
     }
 }
 
 function RenderEmojiFunction() {
-    const [emojiList, setEmojiList] = useState(['😍', '😛', '💗', '😮', '🙃'])
-    const [currentEmoji, setCurrentEmoji] = useState(0)
+    const emojiList = useContext(EmojiListContext)
+    const {currentEmoji, setCurrentEmoji} = useContext(CurrentEmojiContext)
 
     return(
       <div>

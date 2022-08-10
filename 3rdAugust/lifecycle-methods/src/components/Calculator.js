@@ -25,6 +25,9 @@ import './Calculator.css'
 //Do that until there are no more brackets
 //Return answer
 
+//Iterate through the whole answer array and find a starting bracket and find an ending bracket
+//Do that until there aare no more brackets
+
 const operations = ['+', '-', 'X', '/', '**']
 const bracketOperations = ['(', ')']
 
@@ -134,9 +137,9 @@ function Calculator({scientific}) {
 }
 
 class CalculatorClass extends Component {
-    constructor({scientific}) {
-        super({scientific})
-        this.scientific = scientific
+    constructor(props) {
+        super(props)
+        this.scientific = props.scientific
 
         this.state = {
             resultString: '0',
@@ -326,10 +329,6 @@ function getDecimalCount(num) {
         return numString.split('.')[1].length
     }
     return 0;
-}
-
-function RECURSIVE_findBrackets(array) {
-
 }
 
 const CalculatorButton = ({text, setResultString, type, scientific, setHistory, setShowHistory, history}) => {

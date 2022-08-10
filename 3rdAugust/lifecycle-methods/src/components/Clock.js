@@ -21,14 +21,20 @@ const ClockText = ({time}) => {
     let minutes = time.getMinutes();
     let seconds = time.getSeconds();
 
-    const AMOrPM = hours > 12 ? 'PM' : 'AM'
+    const AMOrPM = hours >= 12 ? 'PM' : 'AM'
 
     hours = hours > 12 ? hours - 12 : hours
     minutes = minutes < 10 ? '0' + minutes : minutes
     seconds = seconds < 10 ? '0' + seconds : seconds
 
     return (
-        <h1>The time is: {hours}:{minutes}:{seconds}{AMOrPM}</h1>
+        <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+            <h1>The time is: {hours}:</h1>
+            <h1 style={{color: 'red'}}>{minutes}</h1>
+            <h1>:</h1>
+            <h1 style={{color: 'green'}}>{seconds}</h1>
+            <h1>{AMOrPM}</h1>
+        </div>
     )
 }
 
@@ -38,7 +44,7 @@ const CircleClock = ({time}) => {
     const secondsHandStyle = {transform: `rotateZ(${secondsHandRotateAmount}deg)`}
 
     const minutes = time.getMinutes()
-    const minuteHandRotateAmount = ((minutes * 6) + (seconds / 12)) - 90
+    const minuteHandRotateAmount = ((minutes * 6) + (seconds / 10)) - 90
     const minuteHandStyle = {transform: `rotateZ(${minuteHandRotateAmount}deg)`}
     
     const hours = time.getHours()

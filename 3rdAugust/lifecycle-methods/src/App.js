@@ -1,4 +1,4 @@
-import React, {Component, PureComponent, useState} from 'react'
+import React, {Component, PureComponent, useState, useReducer} from 'react'
 import ReactDOM from 'react-dom';
 import './App.css';
 import {RenderEmojiClass, RenderEmojiFunction} from './components/RenderEmoji'
@@ -19,12 +19,45 @@ import MouseContainer from './components/MouseContainer';
 import DataFetch from './components/DataFetch';
 import DataFetchTwo from './components/DataFetchTwo';
 import Clock from './components/Clock';
+import ContextDemoE from './components/ContextDemoE';
+import UseReducerCounter from './components/UseReducerCounter';
+import UseReducerCounterTwo from './components/UseReducerCounter2';
+import { GlobalCounterContext } from './components/context/GlobalCounterContext';
+import CounterThree from './components/CounterThree';
+import CounterFour from './components/CounterFour';
+import CounterFive from './components/CounterFive';
+import DataFetchWithUseReducer from './components/DataFetchWithUseReducer';
+import { CurrentEmojiContext } from './components/context/EmojiContext';
+import Counter from './components/Counter';
+import UseMemoDemo from './components/UseMemoDemo';
+import FocusInput from './components/UseRefDemo';
+import HookTimer from './components/HookTimer';
+import DocTitleOne from './components/DocTitleOne';
+import DocTitleTwo from './components/DocTitleTwo';
+import CounterWithCustomHookOne from './components/CounterWithCustomHookOne';
+import CustomHookForm from './components/CustomHookForm';
+
+const GlobalCountInitialState = 0
+function GlobalCountReducer(state, action) {
+  switch(action.type) {
+    case 'increment':
+      return state + action.value
+    case 'decrement':
+      return state - action.value
+    case 'reset':
+      return GlobalCountInitialState
+    default:
+      return state
+  }
+}
 
 function App() {
   var verbose = false;
   const [showWarning, setShowWarning] = useState(true);
   const [showModal, setShowModal] = useState(false)
   const [name, setName] = useState('Sebastian')
+  const [count, dispatchCount] = useReducer(GlobalCountReducer, GlobalCountInitialState)
+  const [currentEmoji, setCurrentEmoji] = useState(0)
   class MountingExample extends Component {
     constructor(props) {
       super(props) //Call the constructor method for React.Component
@@ -439,10 +472,6 @@ function App() {
       <NumbersList numbers={[1, 2, 3, 4, 5]}/>
       <h1>Lists and Keys - Blog</h1>
       <Blog posts={posts}/>
-      <h1>Rendering Emojis - Class Component</h1>
-      <RenderEmojiClass/>
-      <h1>Rendering Emojis - Function Component</h1>
-      <RenderEmojiFunction/>
       <h1>Calculator - Function Component</h1>
       <Calculator scientific={false}/>
       <h1>Scientific Calculator - Function Component</h1>
@@ -498,6 +527,46 @@ function App() {
       <DataFetchTwo/>
       <h1>Clock - useState</h1>
       <Clock/>
+      <CurrentEmojiContext.Provider value={{currentEmoji, setCurrentEmoji}}>
+        <h1>Rendering Emojis - Class Component</h1>
+        <RenderEmojiClass/>
+        <h1>Rendering Emojis - Function Component</h1>
+        <RenderEmojiFunction/>
+      </CurrentEmojiContext.Provider>
+      <h1>useContext Demo</h1>
+      <NameContextTwo.Provider value={{name, setName}}>
+        <ContextDemoE/>
+      </NameContextTwo.Provider>
+      <h1>useReducer - Counter</h1>
+      <UseReducerCounter/>
+      <h1>useReducer with object actions - Counter</h1>
+      <UseReducerCounterTwo/>
+      <h1>Global Counter - useReducer and useContext</h1>
+      <GlobalCounterContext.Provider value={{count, dispatchCount}}>
+        <h3>{count}</h3>
+        <CounterThree/>
+        <CounterFour/>
+        <CounterFive/>
+      </GlobalCounterContext.Provider>
+      <h1>Data Fetch with useReducer</h1>
+      <DataFetchWithUseReducer/>
+      <h1>Counter</h1>
+      <Counter/>
+      {/*
+        <h1>useMemo Demo - Fetching Coinmap API data</h1>
+        <UseMemoDemo/>
+      */}
+      <h1>UseRef Demo</h1>
+      <FocusInput/>
+      <h1>Hook Timer</h1>
+      <HookTimer/>
+      <h1>Custom Hooks - Change document title</h1>
+      <DocTitleOne/>
+      <DocTitleTwo/>
+      <h1>Custom Hooks - Counter</h1>
+      <CounterWithCustomHookOne/>
+      <h1>Custom Hooks - Form</h1>
+      <CustomHookForm/>
     </div>
   );
 }
