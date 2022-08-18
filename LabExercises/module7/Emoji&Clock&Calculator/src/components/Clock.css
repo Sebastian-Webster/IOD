@@ -1,0 +1,134 @@
+:root {
+    --clock-width: 50vw;
+    --outline-width: 0px;
+}
+
+#clock {
+    border: 1px solid black;
+    border-radius: 50%;
+    width: var(--clock-width);
+    min-height: var(--clock-width);
+    position: relative;
+}
+
+#hourHandContainer, #minuteHandContainer, #secondHandContainer {
+    display: flex;
+    flex-direction: row;
+    transform: rotateZ(-90deg);
+    position: absolute;
+}
+
+#hiddenHourHand, #hiddenMinuteHand, #hiddenSecondHand {
+    min-width: calc(var(--clock-width) / 2);
+    outline: var(--outline-width) solid red;
+}
+
+#shownHourHand {
+    min-width: calc(var(--clock-width) / 4);
+    height: calc(var(--clock-width) / 100);
+    background-color: black;
+    z-index: 4;
+}
+
+#hiddenHourHandTwo {
+    min-width: calc(var(--clock-width) / 4);
+    outline: var(--outline-width) solid red;
+}
+
+#shownMinuteHand {
+    min-width: calc(var(--clock-width) * 0.35);
+    height: calc(var(--clock-width) / 100);
+    background-color: red;
+    z-index: 3;
+}
+
+#hiddenMinuteHandTwo {
+    min-width: calc(var(--clock-width) * 0.15);
+    outline: var(--outline-width) solid red;
+}
+
+#shownSecondHand {
+    min-width: calc(var(--clock-width) * 0.4);
+    height: calc(var(--clock-width) / 100);
+    background-color: green;
+    z-index: 2;
+}
+
+#hiddenSecondHandTwo {
+    min-width: calc(var(--clock-width) * 0.1);
+    outline: var(--outline-width) solid red;
+}
+
+#num12, #num11, #num10, #num9, #num8, #num7, #num6, #num5, #num4, #num3, #num2, #num1 {
+    position: absolute;
+    font-size: calc(var(--clock-width) * 0.1);
+}
+
+#num12 {
+    top: calc(var(--clock-width) * -0.02);
+    right: calc(var(--clock-width) * 0.44);
+}
+
+#num11 {
+    top: calc(var(--clock-width) * 0.04);
+    right: calc(var(--clock-width) * 0.65);
+}
+
+#num10 {
+    top: calc(var(--clock-width) * 0.2);
+    right: calc(var(--clock-width) * 0.8);
+}
+
+#num9 {
+    top: calc(var(--clock-width) * 0.4);
+    right: calc(var(--clock-width) * 0.9);
+}
+
+#num8 {
+    top: calc(var(--clock-width) * 0.63);
+    right: calc(var(--clock-width) * 0.85);
+}
+
+#num7 {
+    top: calc(var(--clock-width) * 0.8);
+    right: calc(var(--clock-width) * 0.68);
+}
+
+#num6 {
+    top: calc(var(--clock-width) * 0.85);
+    right: calc(var(--clock-width) * 0.46);
+}
+
+#num5 {
+    top: calc(var(--clock-width) * 0.8);
+    left: calc(var(--clock-width) * 0.7);
+}
+
+#num4 {
+    top: calc(var(--clock-width) * 0.63);
+    left: calc(var(--clock-width) * 0.85);
+}
+
+#num3 {
+    top: calc(var(--clock-width) * 0.425);
+    left: calc(var(--clock-width) * 0.9);
+}
+
+#num2 {
+    top: calc(var(--clock-width) * 0.2);
+    left: calc(var(--clock-width) * 0.85);
+}
+
+#num1 {
+    top: calc(var(--clock-width) * 0.04);
+    left: calc(var(--clock-width) * 0.7);
+}
+
+#middleCircle {
+    min-width: calc(var(--clock-width) / 48);
+    min-height: calc(var(--clock-width) / 48);
+    position: absolute;
+    background-color: black;
+    border-radius: 50%;
+    right: calc(var(--clock-width) / 2.06);
+}
