@@ -1,0 +1,1 @@
+docker-compose push && docker-compose up --build

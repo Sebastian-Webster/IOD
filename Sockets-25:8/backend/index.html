@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Socket.IO Chat</title>
+        <style>
+            body { margin: 0; padding-bottom: 3rem; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+            #form { background: rgba(0, 0, 0, 0.15); padding: 0.25rem; position: fixed; bottom: 0; left: 0; right: 0; display: flex; height: 3rem; box-sizing: border-box; backdrop-filter: blur(10px); }
+            #input { border: none; padding: 0 1rem; flex-grow: 1; border-radius: 2rem; margin: 0.25rem; }
+            #input:focus { outline: none; }
+            #form > button { background: #333; border: none; padding: 0 1rem; margin: 0.25rem; border-radius: 3px; outline: none; color: #fff; }
+
+            #messages { list-style-type: none; margin: 0; padding: 0; }
+            #messages > li { padding: 0.5rem 1rem; }
+            #messages > li:nth-child(odd) { background: #efefef; }
+            .personJoined, .personLeft { font-weight: bold; text-align: center; }
+            .personJoined { color: green; }
+            .personLeft { color: red; }
+            .self { font-weight: bold; }
+            #name {display: inline;}
+        </style>
+        <script src="https://kit.fontawesome.com/e682e14782.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div style="position: sticky; top: 0; background-color: white; display: flex; justify-content: space-around; align-items: center;">
+            <h3><i class="fa-solid fa-user"></i><span id="onlineUsersText" style="margin-left: 10px"></span></h3>
+            <div>
+                <h3 id="name"></h3>
+                <a style="text-decoration: underline; cursor: pointer;" onclick="handleNameChange()">Change</a>
+            </div>
+        </div>
+        <ul id="messages"></ul>
+        <form id="form" action="">
+            <input id="input" autocomplete="off"/>
+            <button>Send</button>
+        </form>
+
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+
+            var message = document.getElementById('messages')
+            var form = document.getElementById('form');
+            var input = document.getElementById('input')
+            var onlineUsers = document.getElementById('onlineUsersText')
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (input.value) {
+                    socket.emit('chat message', input.value);
+                    printMsg('Me: ' + input.value, ['self'])
+                    input.value = '';
+                }
+            })
+
+            function setOnlineUsers(users) {
+                onlineUsers.textContent = users
+            }
+
+            function setName(name) {
+                document.getElementById('name').textContent = `Current name: ${name}`
+            }
+
+            function handleNameChange() {
+                const name = prompt('Enter a name:')
+                if (name) socket.emit('change name', name)
+            }
+
+            function printMsg(msg, msgClasses = []) {
+                const item = document.createElement('li');
+                item.textContent = msg;
+                item.classList.add(...msgClasses);
+                message.appendChild(item);
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+
+            socket.on('chat message', function(msg) {
+                printMsg(`${msg.name}: ${msg.msg}`)
+            })
+
+            socket.on('person joined', (msg) => {
+                printMsg(msg.message, ['personJoined'])
+                setOnlineUsers(msg.onlineUsers)
+            })
+
+            socket.on('person left', (msg) => {
+                printMsg(msg.message, ['personLeft'])
+                setOnlineUsers(msg.onlineUsers)
+            })
+
+            socket.on('online users', (number) => {
+                setOnlineUsers(number)
+            })
+
+            socket.on('error', (error) => alert('ERROR: ' + error))
+            socket.on('get name', setName)
+        </script>
+    </body>
+</html>
