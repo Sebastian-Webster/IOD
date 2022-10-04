@@ -119,3 +119,81 @@ setTimeout(person.getNameThree, 1000) //Function logs undefined because setTimeo
 person.getNameThree() //Logs person.name because there is person context
 person.getNameTwo() //Logs undefined.
 person.getName() //Logs person.name because there is person context
+
+
+function Pen(name, color, price) {
+    this.name = name;
+    this.color = color;
+    this.price = "$" + price;
+}
+
+Pen.prototype.showPenDetails = function() {
+    console.log(`This pen is a ${this.color} ${this.name} and it costs ${this.price}`)
+}
+
+let pen1 = new Pen("Camel", "Blue", 5)
+
+pen1.showPenDetails()
+
+class PenClass {
+    constructor(name, color, price) {
+        this.name = name;
+        this.color = color;
+        this.price = "$" + price;
+    }
+
+    showPenDetails() {
+        console.log(`This pen is a ${this.color} ${this.name} and it costs ${this.price}`)
+    }
+}
+
+let pen2 = new PenClass("Camel", "Blue", 5)
+
+pen2.showPenDetails()
+
+function Person() {
+    this.name = 'John'
+}
+
+Person.prototype.name = 'Sebastian'
+Person.prototype.age = 15
+let person1 = new Person()
+
+console.log(person1) // {name: 'John'}
+console.log(person1.name) // 'John'
+console.log(person1.age) // 15
+
+class Employee {
+    constructor(name) {
+        this.name = name;
+    }
+
+    getName() {
+        return this.name
+    }
+
+    setName(newName) {
+        if (typeof newName !== 'string' || newName.trim().length === 0) throw new Error('newName is not valid')
+        this.name = newName;
+    }
+}
+
+let employee = new Employee("Sebastian")
+console.log(employee.name)
+
+class Contractor extends Employee {
+    constructor(name) {
+        super(name)
+    }
+
+    displayStatus() {
+        console.log('I am a Contractor')
+    }
+}
+
+let contractor = new Contractor("John")
+
+contractor.displayStatus()
+console.log(contractor.getName())
+contractor.setName("Sebastian")
+console.log(contractor.getName())
